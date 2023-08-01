@@ -111,7 +111,7 @@ namespace trackingPlatform.Service.BussinessServices
                 List<GhiChuSp> ghiChuSps = null;
                 if (sanPhamKinhDoanh != null)
                 {
-                    ghiChuSps = await _manualMapper.MapListGhiChuSpForSanPham(sanPhamRequest.GhiChuSps);
+                    ghiChuSps = await _manualMapper.MapListGhiChuSpForSanPham(sanPhamRequest.GhiChuSps, sanPhamRequest.MaSanPham);
 
                 }
                 else
@@ -119,7 +119,7 @@ namespace trackingPlatform.Service.BussinessServices
                     SanPhamKinhDoanh temp = _manualMapper.MapSanPhamKinhDoanh(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!);
                     sanPhamKinhDoanhs1.Add(temp);
                     await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs1);
-                    ghiChuSps = await _manualMapper.MapListGhiChuSpForSanPham(sanPhamRequest.GhiChuSps);
+                    ghiChuSps = await _manualMapper.MapListGhiChuSpForSanPham(sanPhamRequest.GhiChuSps, sanPhamRequest.MaSanPham);
 
                 }
                 List<ThongTinChinh> thongTinChinhs = null;

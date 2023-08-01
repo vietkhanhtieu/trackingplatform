@@ -20,7 +20,7 @@ namespace trackingPlatform.Service.BussinessServices
             return await _ghiChuSanPhamRepositoryServices.FindByGhiChu1(ghiChu1);
         }
 
-        public async Task<GhiChuSp> GetCanhGiacDuoc(string maGhiChu)
+        public async Task<GhiChuSp> GetGhiChuSanPham(string maGhiChu)
         {
             return await _ghiChuSanPhamRepositoryServices.FindByMaCgd(maGhiChu);
 
@@ -38,7 +38,7 @@ namespace trackingPlatform.Service.BussinessServices
 
         public async Task<GhiChuSp> DeleteAsync(string maGhiChu)
         {
-            GhiChuSp ghiChuSp = await GetCanhGiacDuoc(maGhiChu);
+            GhiChuSp ghiChuSp = await GetGhiChuSanPham(maGhiChu);
             if (ghiChuSp != null)
             {
                 await _ghiChuSanPhamRepositoryServices.DeleteAsync(ghiChuSp);

@@ -145,7 +145,7 @@ namespace trackingPlatform.Service.ExternalServices
                 }
 
                 List<CanhGiacDuoc> canhGiacDuocs = await MapListCanhGiacDuocForSanPham(sanPhamRequest.CanhGiacDuocs, sanPhamRequest.MaSanPham);
-                List<GhiChuSp> ghiChuSps = await MapListGhiChuSpForSanPham(sanPhamRequest.GhiChuSps);
+                List<GhiChuSp> ghiChuSps = await MapListGhiChuSpForSanPham(sanPhamRequest.GhiChuSps, sanPhamRequest.MaSanPham);
                 List<ThongTinChinh> thongTinChinhs = await MapListThongTinChinhForSanPham(sanPhamRequest.ThongTinChinhs);
                 List<ThongTinNguonGoc> thongTinNguonGocs = await MapListThongTinNguonGocForSanPham(sanPhamRequest.ThongTinNguonGocs);
                 List<ThongTinPhapLy> thongTinPhapLies = await MapListThongTinPhapLyForSanPham(sanPhamRequest.ThongTinPhapLies);
@@ -334,17 +334,18 @@ namespace trackingPlatform.Service.ExternalServices
             return canhGiacDuocs;
         }
 
-        public async Task<List<GhiChuSp>> MapListGhiChuSpForSanPham(ICollection<SP_GhiChuSanPhamRequest> sP_GhiChuSanPhamRequests)
+        public async Task<List<GhiChuSp>> MapListGhiChuSpForSanPham(ICollection<SP_GhiChuSanPhamRequest> sP_GhiChuSanPhamRequests, string maSanPham)
         {
             List<GhiChuSp> canhGiacDuocs = new List<GhiChuSp>();
             foreach (SP_GhiChuSanPhamRequest ghiChuSanPhamRequest in sP_GhiChuSanPhamRequests)
             {
-                GhiChuSp ghiChuSp = await _ghiChuSanPhamServices.FindByNameAsync(ghiChuSanPhamRequest.GhiChu1!);
+                GhiChuSp ghiChuSp = await _ghiChuSanPhamServices.GetGhiChuSanPham(ghiChuSanPhamRequest.MaGhiChu);
                 if (ghiChuSp == null)
                 {
                     ghiChuSp = new GhiChuSp
                     {
                         MaGhiChu = ghiChuSanPhamRequest.MaGhiChu,
+                        MaSanPham = maSanPham,
                         GhiChu1 = ghiChuSanPhamRequest.GhiChu1,
                         GhiChu2 = ghiChuSanPhamRequest.GhiChu2,
                         GhiChu3 = ghiChuSanPhamRequest.GhiChu3
