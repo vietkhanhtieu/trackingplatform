@@ -16,6 +16,5 @@ public partial class LoaiSp : BaseModel
 
     public virtual DanhMucLoaiSp? MaDanhMucLspNavigation { get; set; }
     [JsonIgnore]
-
     public virtual ICollection<SanPhamKinhDoanh> SanPhamKinhDoanhs { get; } = new List<SanPhamKinhDoanh>();
 }

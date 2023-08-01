@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\WORK\\API\\APIVersion1\\gonsa-product-management-api-app\\trackingPlatform\\trackingPlatform\\trackingPlatform.csproj": {}
+    "D:\\WORK\\API\\Tracking\\trackingplatform\\trackingPlatform\\trackingPlatform.csproj": {}
   },
   "projects": {
-    "D:\\WORK\\API\\APIVersion1\\gonsa-product-management-api-app\\trackingPlatform\\trackingPlatform\\trackingPlatform.csproj": {
+    "D:\\WORK\\API\\Tracking\\trackingplatform\\trackingPlatform\\trackingPlatform.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\WORK\\API\\APIVersion1\\gonsa-product-management-api-app\\trackingPlatform\\trackingPlatform\\trackingPlatform.csproj",
+        "projectUniqueName": "D:\\WORK\\API\\Tracking\\trackingplatform\\trackingPlatform\\trackingPlatform.csproj",
         "projectName": "trackingPlatform",
-        "projectPath": "D:\\WORK\\API\\APIVersion1\\gonsa-product-management-api-app\\trackingPlatform\\trackingPlatform\\trackingPlatform.csproj",
+        "projectPath": "D:\\WORK\\API\\Tracking\\trackingplatform\\trackingPlatform\\trackingPlatform.csproj",
         "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-        "outputPath": "D:\\WORK\\API\\APIVersion1\\gonsa-product-management-api-app\\trackingPlatform\\trackingPlatform\\obj\\",
+        "outputPath": "D:\\WORK\\API\\Tracking\\trackingplatform\\trackingPlatform\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\ComponentOne\\WinForms Edition\\bin\\v6\\"
@@ -48,6 +48,14 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[11.0.0, )"
+            },
+            "DateOnlyTimeOnly.AspNet": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "DateOnlyTimeOnly.AspNet.Swashbuckle": {
+              "target": "Package",
+              "version": "[2.1.1, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

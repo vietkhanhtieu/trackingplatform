@@ -100,7 +100,7 @@ namespace trackingPlatform.Models.Request.CreateUpdateSanPham
         public virtual ICollection<SP_CanhGiacDuocRequest> CanhGiacDuocs { get; set; } = new List<SP_CanhGiacDuocRequest>();
 
         [BindNever]
-        public virtual ICollection<GhiChuSp> GhiChuSps { get;  } = new List<GhiChuSp>();
+        public virtual ICollection<SP_GhiChuSanPhamRequest> GhiChuSps { get; set; } = new List<SP_GhiChuSanPhamRequest>();
 
         [BindNever]
         [JsonIgnore]
@@ -140,20 +140,16 @@ namespace trackingPlatform.Models.Request.CreateUpdateSanPham
         public virtual NhomKinhDoanh? MaNhomKinhDoanhNavigation { get; set; }
 
         [BindNever]
-        [JsonIgnore]
-        public virtual ICollection<ThongTinChinh> ThongTinChinhs { get;  } = new List<ThongTinChinh>();
+        public virtual ICollection<SP_ThongTinChinhRequest> ThongTinChinhs { get; set; } = new List<SP_ThongTinChinhRequest>();
 
         [BindNever]
-        [JsonIgnore]
-        public virtual ICollection<ThongTinNguonGoc> ThongTinNguonGocs { get;  } = new List<ThongTinNguonGoc>();
+        public virtual ICollection<SP_ThongTinNguonGocRequest> ThongTinNguonGocs { get; set; } = new List<SP_ThongTinNguonGocRequest>();
 
         [BindNever]
-        [JsonIgnore]
-        public virtual ICollection<ThongTinNoiBo> ThongTinNoiBos { get;  } = new List<ThongTinNoiBo>();
+        public virtual ICollection<SP_ThongTinNoiBoRequest> ThongTinNoiBos { get; set; } = new List<SP_ThongTinNoiBoRequest>();
 
         [BindNever]
-        [JsonIgnore]
-        public virtual ICollection<ThongTinPhapLy> ThongTinPhapLies { get;  } = new List<ThongTinPhapLy>();
+        public virtual ICollection<SP_ThongTinPhapLyRequest> ThongTinPhapLies { get; set; } = new List<SP_ThongTinPhapLyRequest>();
 
     }
 }

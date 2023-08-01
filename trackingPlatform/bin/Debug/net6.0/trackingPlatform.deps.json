@@ -9,6 +9,8 @@
       "trackingPlatform/1.0.0": {
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
+          "DateOnlyTimeOnly.AspNet": "2.1.1",
+          "DateOnlyTimeOnly.AspNet.Swashbuckle": "2.1.1",
           "Microsoft.EntityFrameworkCore.Design": "7.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
@@ -39,6 +41,26 @@
           "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {
             "assemblyVersion": "11.0.0.0",
             "fileVersion": "11.0.0.0"
+          }
+        }
+      },
+      "DateOnlyTimeOnly.AspNet/2.1.1": {
+        "runtime": {
+          "lib/net6.0/DateOnlyTimeOnly.AspNet.dll": {
+            "assemblyVersion": "2.1.1.0",
+            "fileVersion": "2.1.1.0"
+          }
+        }
+      },
+      "DateOnlyTimeOnly.AspNet.Swashbuckle/2.1.1": {
+        "dependencies": {
+          "DateOnlyTimeOnly.AspNet": "2.1.1",
+          "Swashbuckle.AspNetCore.SwaggerGen": "6.2.3"
+        },
+        "runtime": {
+          "lib/net6.0/DateOnlyTimeOnly.AspNet.Swashbuckle.dll": {
+            "assemblyVersion": "2.1.1.0",
+            "fileVersion": "2.1.1.0"
           }
         }
       },
@@ -372,6 +394,20 @@
       "sha512": "sha512-0asw5WxdCFh2OTi9Gv+oKyH9SzxwYQSnO8TV5Dd0GggovILzJW4UimP26JAcxc3yB5NnC5urooZ1BBs8ElpiBw==",
       "path": "automapper.extensions.microsoft.dependencyinjection/11.0.0",
       "hashPath": "automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512"
+    },
+    "DateOnlyTimeOnly.AspNet/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7HlGV6sm0efRMquxnZaoqV3KybUMOs1IaJ4TaX85v7IZF01h1YV6Zscos9g4qQfrGYfvqLjbpe3Q54cmMBeISQ==",
+      "path": "dateonlytimeonly.aspnet/2.1.1",
+      "hashPath": "dateonlytimeonly.aspnet.2.1.1.nupkg.sha512"
+    },
+    "DateOnlyTimeOnly.AspNet.Swashbuckle/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-X2k2yelbE2jyBI/pOv5T615ell5Rhmb31MV1mM0Q+VpqNUran20gdGz9MBP9dbAcbH1EQ/l/s/EcX/+Bp365jQ==",
+      "path": "dateonlytimeonly.aspnet.swashbuckle/2.1.1",
+      "hashPath": "dateonlytimeonly.aspnet.swashbuckle.2.1.1.nupkg.sha512"
     },
     "Humanizer.Core/2.14.1": {
       "type": "package",

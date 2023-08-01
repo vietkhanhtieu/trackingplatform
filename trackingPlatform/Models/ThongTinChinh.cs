@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace trackingPlatform.Models;
 
-public partial class ThongTinChinh
+public partial class ThongTinChinh : BaseModel
 {
     public string MaSanPham { get; set; } = null!;
 

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace trackingPlatform.Models;
 
-public partial class ThongTinNguonGoc
+public partial class ThongTinNguonGoc : BaseModel
 {
     public string MaSanPham { get; set; } = null!;
 
@@ -24,6 +25,6 @@ public partial class ThongTinNguonGoc
     public string? TieuChuanSanXuat { get; set; }
 
     public short? SdkVoThoiHan { get; set; }
-
+    [JsonIgnore]
     public virtual SanPhamKinhDoanh MaSanPhamNavigation { get; set; } = null!;
 }

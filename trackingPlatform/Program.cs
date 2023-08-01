@@ -6,6 +6,7 @@ using trackingPlatform.Service.ExternalServices;
 using trackingPlatform.Service.RepositoryServices;
 using System.Text.Json.Serialization;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -25,6 +26,18 @@ builder.Services.AddEntityFrameworkNpgsql()
 
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services
+    .AddControllers(options => options.UseDateOnlyTimeOnlyStringConverters())
+    .AddJsonOptions(options => options.UseDateOnlyTimeOnlyStringConverters());
+builder.Services.AddSwaggerGen(options =>
+                    {
+                        options.UseDateOnlyTimeOnlyStringConverters();
+                    });
+
+
+
+
+
 
 
 builder.Services.AddScoped<DangBaoCheService>();
@@ -39,8 +52,18 @@ builder.Services.AddScoped<LoaiSpServices>();
 builder.Services.AddScoped<DanhMucLoaiSpServices>();
 builder.Services.AddScoped<SanPhamKinhDoanhServices>();
 builder.Services.AddScoped<CanhGiacDuocServices>();
+builder.Services.AddScoped<GhiChuSanPhamServices>();
+builder.Services.AddScoped<ThongTinChinhServices>();
+builder.Services.AddScoped<ThongTinNguonGocServices>();
+builder.Services.AddScoped<ThongTinPhapLyServices>();
+builder.Services.AddScoped<ThongTinNoiBoServices>();
 builder.Services.AddScoped<ManualMapper>();
 
+builder.Services.AddScoped<ThongTinNoiBoRepositoryServices>();
+builder.Services.AddScoped<ThongTinPhapLyRepositoryServices>();
+builder.Services.AddScoped<ThongTinNguonGocRepositoryServices>();
+builder.Services.AddScoped<ThongTinChinhRepositoryServices>();
+builder.Services.AddScoped<GhiChuSanPhamRepositoryServices>();
 builder.Services.AddScoped<CanhGiacDuocRepositoryServices>();
 builder.Services.AddScoped<SanPhamKinhDoanhRepositoryServices>();
 builder.Services.AddScoped<DanhMucLoaiSanPhamRepositoryServices>();
