@@ -99,14 +99,14 @@ namespace trackingPlatform.Service.BussinessServices
                     canhGiacDuocs = await _manualMapper.MapListCanhGiacDuocForSanPham(sanPhamRequest.CanhGiacDuocs, sanPhamRequest.MaSanPham);
 
                 }
-                else
-                {
-                    SanPhamKinhDoanh temp = _manualMapper.MapSanPhamKinhDoanh(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!);
-                    sanPhamKinhDoanhs1.Add(temp);
-                    await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs1);
-                    canhGiacDuocs = await _manualMapper.MapListCanhGiacDuocForSanPham(sanPhamRequest.CanhGiacDuocs, sanPhamRequest.MaSanPham);
+                //else
+                //{
+                //    SanPhamKinhDoanh temp = _manualMapper.MapRelationOneToManyForSanPhamKinhDoanh(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!);
+                //    sanPhamKinhDoanhs1.Add(temp);
+                //    await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs1);
+                //    canhGiacDuocs = await _manualMapper.MapListCanhGiacDuocForSanPham(sanPhamRequest.CanhGiacDuocs, sanPhamRequest.MaSanPham);
 
-                }
+                //}
 
                 List<GhiChuSp> ghiChuSps = null;
                 if (sanPhamKinhDoanh != null)
@@ -114,73 +114,73 @@ namespace trackingPlatform.Service.BussinessServices
                     ghiChuSps = await _manualMapper.MapListGhiChuSpForSanPham(sanPhamRequest.GhiChuSps, sanPhamRequest.MaSanPham);
 
                 }
-                else
-                {
-                    SanPhamKinhDoanh temp = _manualMapper.MapSanPhamKinhDoanh(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!);
-                    sanPhamKinhDoanhs1.Add(temp);
-                    await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs1);
-                    ghiChuSps = await _manualMapper.MapListGhiChuSpForSanPham(sanPhamRequest.GhiChuSps, sanPhamRequest.MaSanPham);
+                //else
+                //{
+                //    SanPhamKinhDoanh temp = _manualMapper.MapRelationOneToManyForSanPhamKinhDoanh(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!);
+                //    sanPhamKinhDoanhs1.Add(temp);
+                //    await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs1);
+                //    ghiChuSps = await _manualMapper.MapListGhiChuSpForSanPham(sanPhamRequest.GhiChuSps, sanPhamRequest.MaSanPham);
 
-                }
+                //}
                 List<ThongTinChinh> thongTinChinhs = null;
                 if (sanPhamKinhDoanh != null)
                 {
-                    thongTinChinhs = await _manualMapper.MapListThongTinChinhForSanPham(sanPhamRequest.ThongTinChinhs);
+                    thongTinChinhs = await _manualMapper.MapListThongTinChinhForSanPham(sanPhamRequest.ThongTinChinhs, sanPhamRequest.MaSanPham);
 
                 }
-                else
-                {
-                    SanPhamKinhDoanh temp = _manualMapper.MapSanPhamKinhDoanh(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!);
-                    sanPhamKinhDoanhs1.Add(temp);
-                    await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs1);
-                    thongTinChinhs = await _manualMapper.MapListThongTinChinhForSanPham(sanPhamRequest.ThongTinChinhs);
+                //else
+                //{
+                //    SanPhamKinhDoanh temp = _manualMapper.MapRelationOneToManyForSanPhamKinhDoanh(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!);
+                //    sanPhamKinhDoanhs1.Add(temp);
+                //    await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs1);
+                //    thongTinChinhs = await _manualMapper.MapListThongTinChinhForSanPham(sanPhamRequest.ThongTinChinhs);
 
-                }
+                //}
 
 
                 List<ThongTinNguonGoc> thongTinNguonGocs = null;
                 if (sanPhamKinhDoanh != null)
                 {
-                    thongTinNguonGocs = await _manualMapper.MapListThongTinNguonGocForSanPham(sanPhamRequest.ThongTinNguonGocs);
+                    thongTinNguonGocs = await _manualMapper.MapListThongTinNguonGocForSanPham(sanPhamRequest.ThongTinNguonGocs, sanPhamRequest.MaSanPham);
 
                 }
-                else
-                {
-                    SanPhamKinhDoanh temp = _manualMapper.MapSanPhamKinhDoanh(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!);
-                    sanPhamKinhDoanhs1.Add(temp);
-                    await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs1);
-                    thongTinNguonGocs = await _manualMapper.MapListThongTinNguonGocForSanPham(sanPhamRequest.ThongTinNguonGocs);
-                }
+                //else
+                //{
+                //    SanPhamKinhDoanh temp = _manualMapper.MapRelationOneToManyForSanPhamKinhDoanh(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!);
+                //    sanPhamKinhDoanhs1.Add(temp);
+                //    await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs1);
+                //    thongTinNguonGocs = await _manualMapper.MapListThongTinNguonGocForSanPham(sanPhamRequest.ThongTinNguonGocs);
+                //}
 
                 List<ThongTinPhapLy> thongTinPhapLies = null;
                 if (sanPhamKinhDoanh != null)
                 {
-                    thongTinPhapLies = await _manualMapper.MapListThongTinPhapLyForSanPham(sanPhamRequest.ThongTinPhapLies);
+                    thongTinPhapLies = await _manualMapper.MapListThongTinPhapLyForSanPham(sanPhamRequest.ThongTinPhapLies, sanPhamRequest.MaSanPham);
 
                 }
-                else
-                {
-                    SanPhamKinhDoanh temp = _manualMapper.MapSanPhamKinhDoanh(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!);
-                    sanPhamKinhDoanhs1.Add(temp);
-                    await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs1);
-                    thongTinPhapLies = await _manualMapper.MapListThongTinPhapLyForSanPham(sanPhamRequest.ThongTinPhapLies);
-                }
+                //else
+                //{
+                //    SanPhamKinhDoanh temp = _manualMapper.MapRelationOneToManyForSanPhamKinhDoanh(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!);
+                //    sanPhamKinhDoanhs1.Add(temp);
+                //    await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs1);
+                //    thongTinPhapLies = await _manualMapper.MapListThongTinPhapLyForSanPham(sanPhamRequest.ThongTinPhapLies);
+                //}
 
                 List<ThongTinNoiBo> thongTinNoiBos = null;
                 if (sanPhamKinhDoanh != null)
                 {
-                    thongTinNoiBos = await _manualMapper.MapListThongTinNoiBoForSanPham(sanPhamRequest.ThongTinNoiBos);
+                    thongTinNoiBos = await _manualMapper.MapListThongTinNoiBoForSanPham(sanPhamRequest.ThongTinNoiBos, sanPhamRequest.MaSanPham);
 
                 }
-                else
-                {
-                    SanPhamKinhDoanh temp = _manualMapper.MapSanPhamKinhDoanh(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!);
-                    sanPhamKinhDoanhs1.Add(temp);
-                    await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs1);
-                    thongTinNoiBos = await _manualMapper.MapListThongTinNoiBoForSanPham(sanPhamRequest.ThongTinNoiBos);
+                //else
+                //{
+                //    SanPhamKinhDoanh temp = _manualMapper.MapRelationOneToManyForSanPhamKinhDoanh(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!);
+                //    sanPhamKinhDoanhs1.Add(temp);
+                //    await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs1);
+                //    thongTinNoiBos = await _manualMapper.MapListThongTinNoiBoForSanPham(sanPhamRequest.ThongTinNoiBos);
 
-                }
-                sanPhamKinhDoanhs.Add(_manualMapper.MapSanPhamKinhDoanhRequestForSanPham(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!, canhGiacDuocs, ghiChuSps, thongTinChinhs, thongTinNguonGocs, thongTinNoiBos, thongTinPhapLies));
+                //}
+                sanPhamKinhDoanhs.Add(_manualMapper.MapSanPhamRequestForSanPham(sanPhamRequest,dangBaoChe, dinhHuongSanPham,dieuKienBaoQuan, donViTinh, sanPhamGop, loaiSp, loaiSpNoiBo, nhomKiemSoat, nhomKinhDoanh ,canhGiacDuocs, ghiChuSps, thongTinChinhs, thongTinNguonGocs, thongTinNoiBos, thongTinPhapLies));
             }
             return await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs);
         }

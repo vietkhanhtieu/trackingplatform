@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Text.Json.Serialization;
 
 namespace trackingPlatform.Models.Request.CreateUpdate
 {
@@ -16,7 +17,7 @@ namespace trackingPlatform.Models.Request.CreateUpdate
 
         public string? MaDanhMucLsp { get; set; }
         [BindNever]
-
+        [JsonIgnore]
         public virtual DanhMucLoaiSp? MaDanhMucLspNavigation { get; set; }
 
     }

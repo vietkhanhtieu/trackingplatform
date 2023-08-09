@@ -1,7 +1,10 @@
-﻿namespace trackingPlatform.Models.Request.CreateUpdate
+﻿using System.Text.Json.Serialization;
+
+namespace trackingPlatform.Models.Request.CreateUpdate
 {
     public class CanhGiacDuocRequest
     {
+
         public string MaSanPham { get; set; } = null!;
 
         public string MaCdg { get; set; } = null!;

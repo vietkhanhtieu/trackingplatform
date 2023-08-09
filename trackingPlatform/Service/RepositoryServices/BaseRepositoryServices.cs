@@ -9,7 +9,7 @@ namespace trackingPlatform.Service.RepositoryServices
 
         public readonly CnnDbContext _context;
 
-        protected BaseRepositoryServices(CnnDbContext context)
+        public BaseRepositoryServices(CnnDbContext context)
         {
             _context = context;
         }

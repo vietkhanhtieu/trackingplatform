@@ -7,6 +7,9 @@ namespace trackingPlatform.Models;
 public partial class CanhGiacDuoc : BaseModel
 {
     public string MaCdg { get; set; } = null!;
+
+
+    
     public string MaSanPham { get; set; } = null!;
 
     public string? TuongTacThuoc { get; set; }

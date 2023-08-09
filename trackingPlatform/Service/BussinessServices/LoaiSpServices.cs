@@ -67,8 +67,8 @@ namespace trackingPlatform.Service.BussinessServices
                 danhMucLoaiSp = new DanhMucLoaiSp
                 {
                     MaDanhMucLsp = maDanhMucLoaiSp,
-                    TenDanhMucLsp = "temp",
-                    DinhNghia = "TEMP"
+                    TenDanhMucLsp = "",
+                    DinhNghia = ""
 
                 };
                 await _danhMucLoaiSpServices.AddAsync(danhMucLoaiSp);

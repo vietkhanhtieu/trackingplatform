@@ -4,7 +4,8 @@ namespace trackingPlatform.Models.Request.CreateUpdateSanPham
 {
     public class SP_CanhGiacDuocRequest
     {
-        public string MaSanPham { get; set; } = null!;
+        [JsonIgnore]
+        public string? MaSanPham { get; set; }
         public string MaCdg { get; set; } = null!;
         public string? TuongTacThuoc { get; set; }
 

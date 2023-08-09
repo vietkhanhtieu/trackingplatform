@@ -1,8 +1,12 @@
-﻿namespace trackingPlatform.Models.Request.CreateUpdateSanPham
+﻿using System.Text.Json.Serialization;
+
+namespace trackingPlatform.Models.Request.CreateUpdateSanPham
 {
     public class SP_ThongTinNguonGocRequest
     {
-        public string MaSanPham { get; set; } = null!;
+
+        [JsonIgnore]
+        public string? MaSanPham { get; set; } 
 
         public string MaTtng { get; set; } = null!;
 

@@ -26,18 +26,15 @@ builder.Services.AddEntityFrameworkNpgsql()
 
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 builder.Services
     .AddControllers(options => options.UseDateOnlyTimeOnlyStringConverters())
     .AddJsonOptions(options => options.UseDateOnlyTimeOnlyStringConverters());
+
 builder.Services.AddSwaggerGen(options =>
                     {
                         options.UseDateOnlyTimeOnlyStringConverters();
                     });
-
-
-
-
-
 
 
 builder.Services.AddScoped<DangBaoCheService>();
