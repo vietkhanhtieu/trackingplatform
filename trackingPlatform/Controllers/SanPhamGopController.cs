@@ -15,7 +15,9 @@ namespace trackingPlatform.Controllers
         {
             _sanPhamGopServices = sanPhamGopServices;
         }
-
+        /// <summary>
+        /// Get Sản phẩm gộp by maGop
+        /// </summary>
         [HttpGet("{maGop}")]
         public async Task<ActionResult<SanPhamGop>> Get(string maGop)
         {
@@ -33,7 +35,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Get all Sản phẩm gộp 
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SanPhamGop>>> Get(int top, int skip, string? filter)
         {
@@ -46,7 +50,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Create or Update Sản phẩm gộp 
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] List<SanPhamGopRequest> sanPhamGopRequests)
         {
@@ -59,7 +65,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Delete Sản phẩm gộp by maGop
+        /// </summary>
         [HttpDelete("{maGop}")]
         public async Task<ActionResult> Delete(string maGop)
         {

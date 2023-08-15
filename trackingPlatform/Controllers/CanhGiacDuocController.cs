@@ -15,6 +15,32 @@ namespace trackingPlatform.Controllers
         {
             _canhGiacDuocServices = canhGiacDuocServices;
         }
+
+
+        /// <summary>
+        /// Get Cảnh giác dược by maCanhGiacDuoc
+        /// </summary>
+
+        [HttpGet("{maCanhGiacDuoc}")]
+        public async Task<ActionResult<CanhGiacDuoc>> Get(string maCanhGiacDuoc)
+        {
+            try
+            {
+                CanhGiacDuoc canhGiacDuoc = await _canhGiacDuocServices.GetCanhGiacDuoc(maCanhGiacDuoc);
+                if (canhGiacDuoc == null)
+                {
+                    return NotFound();
+                }
+                return Ok(canhGiacDuoc);
+            }
+            catch
+            {
+                return Problem();
+            }
+        }
+        /// <summary>
+        /// Get all Cảnh giác dược
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CanhGiacDuoc>>> Get(int top, int skip, string? filter)
         {
@@ -28,12 +54,23 @@ namespace trackingPlatform.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] List<CanhGiacDuocRequest> dangBaoCheRequests)
+       
+
+
+        /// <summary>
+        /// Delete Cảnh giác dược by maCanhGiacDuoc
+        /// </summary>
+        [HttpDelete("{maCanhGiacDuoc}")]
+        public async Task<ActionResult> Delete(string maCanhGiacDuoc)
         {
             try
             {
-                return Ok(await _canhGiacDuocServices.AddorUpdateCanhGiacDuoc(dangBaoCheRequests));
+                CanhGiacDuoc canhGiacDuoc = await _canhGiacDuocServices.DeleteAsync(maCanhGiacDuoc);
+                if (canhGiacDuoc == null)
+                {
+                    return NotFound();
+                }
+                return NoContent();
             }
             catch
             {

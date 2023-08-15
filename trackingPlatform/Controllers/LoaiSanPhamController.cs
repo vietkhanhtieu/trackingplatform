@@ -16,6 +16,10 @@ namespace trackingPlatform.Controllers
             _loaiSpServices = loaiSpServices;
         }
 
+        /// <summary>
+        /// Get Loại sản phẩm by maLoaiSanPham
+        /// </summary>
+
         [HttpGet("{maLoaiSanPham}")]
         public async Task<ActionResult<LoaiSp>> Get(string maLoaiSanPham)
         {
@@ -33,6 +37,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
+        /// <summary>
+        /// Get all Loại sản phẩm 
+        /// </summary>
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LoaiSp>>> Get(int top, int skip, string? filter)
@@ -46,6 +53,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
+        /// <summary>
+        /// Create or Update Loại sản phẩm
+        /// </summary>
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] List<LoaiSpRequest> loaiSpRequest)
@@ -59,7 +69,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Delete Loại sản phẩm by maLoaiSanPham
+        /// </summary>
         [HttpDelete("{maLoaiSanPham}")]
         public async Task<ActionResult> Delete(string maLoaiSanPham)
         {

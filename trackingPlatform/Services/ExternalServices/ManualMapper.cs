@@ -7,6 +7,7 @@ using trackingPlatform.Models.Request.CreateUpdate;
 using trackingPlatform.Models.Request.CreateUpdateSanPham;
 using trackingPlatform.Service.BussinessServices;
 using trackingPlatform.Service.RepositoryServices;
+using trackingPlatform.Utils;
 
 namespace trackingPlatform.Service.ExternalServices
 {
@@ -53,7 +54,7 @@ namespace trackingPlatform.Service.ExternalServices
             _mapper = mapper;
         }
 
-        public SanPhamKinhDoanh MapSanPhamRequestForSanPham(SanPhamRequest sanPhamRequest, DangBaoChe dang, DinhHuongSanPham dinhHuongSanPham, DieuKienBaoQuan dieuKienBaoQuan, DonViTinh donViTinh, SanPhamGop sanPhamGop, LoaiSp loaiSp, LoaiSpNoiBo loaiSpNoiBo, NhomKiemSoat nhomKiemSoat, NhomKinhDoanh nhomKinhDoanh, ICollection<CanhGiacDuoc> canhGiacDuocs, ICollection<GhiChuSp> ghiChuSps, ICollection<ThongTinChinh> thongTinChinhs, ICollection<ThongTinNguonGoc> thongTinNguonGocs,ICollection<ThongTinNoiBo> thongTinNoiBos, ICollection<ThongTinPhapLy> thongTinPhapLies)
+        public SanPhamKinhDoanh MapSanPhamRequestForSanPham(SanPhamRequest sanPhamRequest, DangBaoChe dang, DinhHuongSanPham dinhHuongSanPham, DieuKienBaoQuan dieuKienBaoQuan, DonViTinh donViTinh, SanPhamGop sanPhamGop, LoaiSp loaiSp, LoaiSpNoiBo loaiSpNoiBo, NhomKiemSoat nhomKiemSoat, NhomKinhDoanh nhomKinhDoanh)
         {
             SanPhamKinhDoanh sanPhamKinhDoanh = _mapper.Map<SanPhamKinhDoanh>(sanPhamRequest);
             sanPhamKinhDoanh.MaDangBaoCheNavigation = dang;
@@ -64,106 +65,20 @@ namespace trackingPlatform.Service.ExternalServices
             sanPhamKinhDoanh.MaLoaiSpNavigation = loaiSp;
             sanPhamKinhDoanh.MaLoaiSpNoiBoNavigation = loaiSpNoiBo;
             sanPhamKinhDoanh.MaNhomKiemSoatNavigation = nhomKiemSoat;
-            sanPhamKinhDoanh.MaNhomKinhDoanhNavigation = nhomKinhDoanh;
-            //sanPhamKinhDoanh.CanhGiacDuocs = canhGiacDuocs;
-            //sanPhamKinhDoanh.GhiChuSps = ghiChuSps;
-            //sanPhamKinhDoanh.ThongTinChinhs = thongTinChinhs;
-            //sanPhamKinhDoanh.ThongTinNguonGocs = thongTinNguonGocs;
-            //sanPhamKinhDoanh.ThongTinPhapLies = thongTinPhapLies;
-            //sanPhamKinhDoanh.ThongTinNoiBos = thongTinNoiBos;
+            sanPhamKinhDoanh.MaNhomKinhDoanhNavigation = nhomKinhDoanh;          
             return sanPhamKinhDoanh;
         }
-
-        public SanPhamKinhDoanh MapRelationOneToManyForSanPhamKinhDoanh(SanPhamRequest sanPhamRequest, DangBaoChe dang, DinhHuongSanPham dinhHuongSanPham, DieuKienBaoQuan dieuKienBaoQuan, DonViTinh donViTinh, SanPhamGop sanPhamGop, LoaiSp loaiSp, LoaiSpNoiBo loaiSpNoiBo, NhomKiemSoat nhomKiemSoat, NhomKinhDoanh nhomKinhDoanh)
+        public async Task<DangBaoChe> MapDangBaoCheForSanPham(DangBaoChe dBaoChe)
         {
-            SanPhamKinhDoanh sanPhamKinhDoanh = _mapper.Map<SanPhamKinhDoanh>(sanPhamRequest);
-            sanPhamKinhDoanh.MaDangBaoCheNavigation = dang;
-            sanPhamKinhDoanh.MaDinhHuongNavigation = dinhHuongSanPham;
-            sanPhamKinhDoanh.MaDkbqNavigation = dieuKienBaoQuan;
-            sanPhamKinhDoanh.MaDvtNavigation = donViTinh;
-            sanPhamKinhDoanh.MaGopNavigation = sanPhamGop;
-            sanPhamKinhDoanh.MaLoaiSpNavigation = loaiSp;
-            sanPhamKinhDoanh.MaLoaiSpNoiBoNavigation = loaiSpNoiBo;
-            sanPhamKinhDoanh.MaNhomKiemSoatNavigation = nhomKiemSoat;
-            sanPhamKinhDoanh.MaNhomKinhDoanhNavigation = nhomKinhDoanh;
-            return sanPhamKinhDoanh;
-        }
-
-        //public async Task<List<SanPhamKinhDoanh>> MapListSanPhamRequestForListSanPham(List<SanPhamRequest> sanPhamRequests)
-        //{
-        //    List<SanPhamKinhDoanh> sanPhamKinhDoanhs = new List<SanPhamKinhDoanh>();
-        //    foreach(SanPhamRequest sanPhamRequest in sanPhamRequests)
-        //    {
-        //        DangBaoChe dangBaoChe = null;
-        //        if(sanPhamRequest.MaDangBaoChe != null)
-        //        {
-        //            dangBaoChe = await MapDangBaoCheForSanPham(sanPhamRequest.MaDangBaoChe);                   
-        //        }
-
-        //        DinhHuongSanPham dinhHuongSanPham = null;
-        //        if(sanPhamRequest.MaDinhHuong != null)
-        //        {
-        //            dinhHuongSanPham = await MapDinhHuongSanPhamForSanPham(sanPhamRequest.MaDinhHuong);
-        //        }
-        //        DieuKienBaoQuan dieuKienBaoQuan = null;
-        //        if(sanPhamRequest.MaDkbq != null)
-        //        {
-        //            dieuKienBaoQuan = await MapDieuKienBaoQuanForSanPham(sanPhamRequest.MaDkbq);
-        //        }
-        //        DonViTinh donViTinh = null;
-        //        if(sanPhamRequest.MaDvt != null)
-        //        {
-        //            donViTinh = await MapDonViTinhForSanPham(sanPhamRequest.MaDvt);
-        //        }
-        //        LoaiSp loaiSp = null;
-        //        if(sanPhamRequest.MaLoaiSp != null)
-        //        {
-        //            loaiSp = await MapLoaiSanPhamForSanPham(sanPhamRequest.MaLoaiSp);
-        //        }
-        //        SanPhamGop sanPhamGop = null;
-        //        if(sanPhamRequest.MaGop != null)
-        //        {
-        //            sanPhamGop = await MapSanPhamGopForSanPham(sanPhamRequest.MaGop);
-        //        }
-        //        LoaiSpNoiBo loaiSpNoiBo = null;
-        //        if(sanPhamRequest.MaLoaiSpNoiBo != null)
-        //        {
-        //            loaiSpNoiBo = await MapLoaiSanPhamNoiBoForSanPham(sanPhamRequest.MaLoaiSpNoiBo);
-        //        }
-        //        NhomKiemSoat nhomKiemSoat = null;
-        //        if(sanPhamRequest.MaNhomKiemSoat != null)
-        //        {
-        //            nhomKiemSoat = await MapNhomKiemSoatForSanPham(sanPhamRequest.MaNhomKiemSoat);
-        //        }
-        //        NhomKinhDoanh nhomKinhDoanh = null;
-        //        if (sanPhamRequest.MaNhomKinhDoanh != null)
-        //        {
-        //            nhomKinhDoanh = await MapNhomKinhDoanhForSanPham(sanPhamRequest.MaNhomKinhDoanh);
-        //        }
-
-        //        List<CanhGiacDuoc> canhGiacDuocs = await MapListCanhGiacDuocForSanPham(sanPhamRequest.CanhGiacDuocs, sanPhamRequest.MaSanPham);
-        //        List<GhiChuSp> ghiChuSps = await MapListGhiChuSpForSanPham(sanPhamRequest.GhiChuSps, sanPhamRequest.MaSanPham);
-        //        List<ThongTinChinh> thongTinChinhs = await MapListThongTinChinhForSanPham(sanPhamRequest.ThongTinChinhs);
-        //        List<ThongTinNguonGoc> thongTinNguonGocs = await MapListThongTinNguonGocForSanPham(sanPhamRequest.ThongTinNguonGocs);
-        //        List<ThongTinPhapLy> thongTinPhapLies = await MapListThongTinPhapLyForSanPham(sanPhamRequest.ThongTinPhapLies);
-        //        List<ThongTinNoiBo> thongTinNoiBos = await MapListThongTinNoiBoForSanPham(sanPhamRequest.ThongTinNoiBos);
-
-        //        sanPhamKinhDoanhs.Add(MapRelationManyToOneForSanPham(sanPhamRequest, dangBaoChe!, dinhHuongSanPham!, dieuKienBaoQuan!, donViTinh!, sanPhamGop!, loaiSp!, loaiSpNoiBo!, nhomKiemSoat!, nhomKinhDoanh!, canhGiacDuocs, ghiChuSps, thongTinChinhs, thongTinNguonGocs, thongTinNoiBos, thongTinPhapLies));
-        //    }
-        //    return sanPhamKinhDoanhs;
-        //}
-
-        public async Task<DangBaoChe> MapDangBaoCheForSanPham(string maDangBaoChe)
-        {
-            DangBaoChe dangBaoChe = await _dangBaoCheService.GetDangBaoChe(maDangBaoChe);
+            DangBaoChe dangBaoChe = await _dangBaoCheService.GetDangBaoChe(dBaoChe.MaDangBaoChe);
             if (dangBaoChe == null)
             {
                 dangBaoChe = new DangBaoChe
                 {
-                    MaDangBaoChe = maDangBaoChe,
-                    DangBaoCheDacBiet = "",
-                    DangBaoChe1 = "",
-                    MoTa = ""
+                    MaDangBaoChe = dBaoChe.MaDangBaoChe,
+                    DangBaoCheDacBiet = dBaoChe.DangBaoCheDacBiet,
+                    DangBaoChe1 = dBaoChe.DangBaoChe1,
+                    MoTa = dBaoChe.MoTa
 
                 };
                 await _dangBaoCheService.AddAsync(dangBaoChe);
@@ -171,16 +86,16 @@ namespace trackingPlatform.Service.ExternalServices
             return dangBaoChe;
         }
 
-        public async Task<DinhHuongSanPham> MapDinhHuongSanPhamForSanPham(string maDinhHuongSanPham)
+        public async Task<DinhHuongSanPham> MapDinhHuongSanPhamForSanPham(DinhHuongSanPham dhsp)
         {
-            DinhHuongSanPham dinhHuongSanPham = await _dinhHuongSanPhamService.GetDinhHuongSanAsync(maDinhHuongSanPham);
+            DinhHuongSanPham dinhHuongSanPham = await _dinhHuongSanPhamService.GetDinhHuongSanAsync(dhsp.MaDinhHuong);
             if (dinhHuongSanPham == null)
             {
                 dinhHuongSanPham = new DinhHuongSanPham
                 {
-                    MaDinhHuong = maDinhHuongSanPham,
-                    TenDinhHuong = "",
-                    MoTa = ""
+                    MaDinhHuong = dhsp.MaDinhHuong,
+                    TenDinhHuong = dhsp.TenDinhHuong,
+                    MoTa = dhsp.MoTa
 
                 };
                 await _dinhHuongSanPhamService.AddAsync(dinhHuongSanPham);
@@ -189,16 +104,16 @@ namespace trackingPlatform.Service.ExternalServices
 
         }
 
-        public async Task<DieuKienBaoQuan> MapDieuKienBaoQuanForSanPham(string maDkbq)
+        public async Task<DieuKienBaoQuan> MapDieuKienBaoQuanForSanPham(DieuKienBaoQuan dkbq)
         {
-            DieuKienBaoQuan dieuKienBaoQuan = await _dieuKienBaoQuanServices.GetDieuKienBaoQuan(maDkbq);
+            DieuKienBaoQuan dieuKienBaoQuan = await _dieuKienBaoQuanServices.GetDieuKienBaoQuan(dkbq.MaDkbq);
             if (dieuKienBaoQuan == null)
             {
                 dieuKienBaoQuan = new DieuKienBaoQuan
                 {
-                    MaDkbq = maDkbq,
-                    DieuKienBaoQuan1 = "",
-                    MoTa = ""
+                    MaDkbq = dkbq.MaDkbq,
+                    DieuKienBaoQuan1 = dkbq.DieuKienBaoQuan1,
+                    MoTa = dkbq.MoTa
 
                 };
                 await _dieuKienBaoQuanServices.AddAsync(dieuKienBaoQuan);
@@ -207,15 +122,15 @@ namespace trackingPlatform.Service.ExternalServices
 
         }
 
-        public async Task<DonViTinh> MapDonViTinhForSanPham(string maDonViTinh)
+        public async Task<DonViTinh> MapDonViTinhForSanPham(DonViTinh dvt)
         {
-            DonViTinh donViTinh = await _donViTinhService.GetDonViTinh(maDonViTinh);
+            DonViTinh donViTinh = await _donViTinhService.GetDonViTinh(dvt.MaDvt);
             if (donViTinh == null)
             {
                 donViTinh = new DonViTinh
                 {
-                    MaDvt = maDonViTinh,
-                    DvtCoSo = ""
+                    MaDvt = dvt.MaDvt,
+                    DvtCoSo = dvt.DvtCoSo
 
                 };
                 await _donViTinhService.AddAsync(donViTinh);
@@ -224,29 +139,29 @@ namespace trackingPlatform.Service.ExternalServices
 
         }
 
-        public async Task<SanPhamGop> MapSanPhamGopForSanPham(string maGop)
+        public async Task<SanPhamGop> MapSanPhamGopForSanPham(SanPhamGop spg)
         {
-            SanPhamGop sanPhamGop = await _sanPhamGopServices.GetSanPhamGop(maGop);
+            SanPhamGop sanPhamGop = await _sanPhamGopServices.GetSanPhamGop(spg.MaGop);
             if (sanPhamGop == null)
             {
                 sanPhamGop = new SanPhamGop
                 {
-                    MaGop = maGop,
-                    GhiChu = ""
+                    MaGop = spg.MaGop,
+                    GhiChu = spg.GhiChu
                 };
                 await _sanPhamGopServices.AddAsync(sanPhamGop);
             }
             return sanPhamGop;
         }
 
-        public async Task<LoaiSp> MapLoaiSanPhamForSanPham(string maLoaiSanPham)
+        public async Task<LoaiSp> MapLoaiSanPhamForSanPham(string maLoaiSp)
         {
-            LoaiSp loaiSp = await _loaiSpServices.GetLoaisp(maLoaiSanPham);
+            LoaiSp loaiSp = await _loaiSpServices.GetLoaisp(maLoaiSp);
             if (loaiSp == null)
             {
                 loaiSp = new LoaiSp
                 {
-                    MaLoaiSp = maLoaiSanPham,
+                    MaLoaiSp = maLoaiSp,
                     TenLoaiSp = "",
                     DinhNghia = "",
                     MaDanhMucLsp = "" // maDanhMucLoaiSp Phai la so va tu tang.
@@ -256,52 +171,52 @@ namespace trackingPlatform.Service.ExternalServices
             return loaiSp;
         }
 
-        public async Task<LoaiSpNoiBo> MapLoaiSanPhamNoiBoForSanPham(string maLoaiSanPhamNoiBo)
+        public async Task<LoaiSpNoiBo> MapLoaiSanPhamNoiBoForSanPham(LoaiSpNoiBo lspnb)
         {
-            LoaiSpNoiBo loaiSpNoiBo = await _loaiSpNoiBoService.GetLoaiSpNoiBo(maLoaiSanPhamNoiBo);
+            LoaiSpNoiBo loaiSpNoiBo = await _loaiSpNoiBoService.GetLoaiSpNoiBo(lspnb.MaLoaiSpNoiBo);
             if (loaiSpNoiBo == null)
             {
                 loaiSpNoiBo = new LoaiSpNoiBo
                 {
-                    MaLoaiSpNoiBo = maLoaiSanPhamNoiBo,
-                    TenLoaiSpNoiBo = "",
-                    KyHieuVietTat = "",
-                    GhiChu = ""
+                    MaLoaiSpNoiBo = lspnb.MaLoaiSpNoiBo,
+                    TenLoaiSpNoiBo = lspnb.TenLoaiSpNoiBo,
+                    KyHieuVietTat = lspnb.KyHieuVietTat,
+                    GhiChu = lspnb.GhiChu
                 };
                 await _loaiSpNoiBoService.AddAsync(loaiSpNoiBo);
             }
             return loaiSpNoiBo;
         }
 
-        public async Task<NhomKiemSoat> MapNhomKiemSoatForSanPham(string maNhomKiemSoat)
+        public async Task<NhomKiemSoat> MapNhomKiemSoatForSanPham(NhomKiemSoat nks)
         {
-            NhomKiemSoat nhomKiemSoat = await _nhomKiemSoatServices.GetNhomKiemSoat(maNhomKiemSoat);
+            NhomKiemSoat nhomKiemSoat = await _nhomKiemSoatServices.GetNhomKiemSoat(nks.MaNhomKiemSoat);
             if (nhomKiemSoat == null)
             {
                 nhomKiemSoat = new NhomKiemSoat
                 {
-                    MaNhomKiemSoat = maNhomKiemSoat,
-                    TenNhomKiemSoat = "",
-                    YNghia = "",
-                    GhiChu = ""
+                    MaNhomKiemSoat = nks.MaNhomKiemSoat,
+                    TenNhomKiemSoat = nks.TenNhomKiemSoat,
+                    YNghia = nks.YNghia,
+                    GhiChu = nks.GhiChu
                 };
                 await _nhomKiemSoatServices.AddAsync(nhomKiemSoat);
             }
             return nhomKiemSoat;
         }
 
-        public async Task<NhomKinhDoanh> MapNhomKinhDoanhForSanPham(string maNhomKinhDoanh)
+        public async Task<NhomKinhDoanh> MapNhomKinhDoanhForSanPham(NhomKinhDoanh nkd)
         {
-            NhomKinhDoanh nhomKinhDoanh = await _nhomKinhDoanhServices.GetNhomKinhDoanhAsync(maNhomKinhDoanh);
+            NhomKinhDoanh nhomKinhDoanh = await _nhomKinhDoanhServices.GetNhomKinhDoanhAsync(nkd.MaNhomKinhDoanh);
             if (nhomKinhDoanh == null)
             {
                 nhomKinhDoanh = new NhomKinhDoanh
                 {
-                    MaNhomKinhDoanh = maNhomKinhDoanh,
-                    TenNhomKinhDoanh = "",
-                    KyHieuVietTat = "",
-                    YNghia = "",
-                    GhiChu = ""
+                    MaNhomKinhDoanh = nkd.MaNhomKinhDoanh,
+                    TenNhomKinhDoanh = nkd.TenNhomKinhDoanh,
+                    KyHieuVietTat = nkd.KyHieuVietTat,
+                    YNghia = nkd.YNghia,
+                    GhiChu = nkd.GhiChu
                 };
                 await _nhomKinhDoanhServices.AddAsync(nhomKinhDoanh);
             }
@@ -311,10 +226,10 @@ namespace trackingPlatform.Service.ExternalServices
         public async Task<List<CanhGiacDuoc>> MapListCanhGiacDuocForSanPham(ICollection<SP_CanhGiacDuocRequest> canhGiacDuocRequests, string maSanPham)
         {
             List<CanhGiacDuoc> canhGiacDuocs = new List<CanhGiacDuoc>();
-            foreach(SP_CanhGiacDuocRequest canhGiacDuocRequest in canhGiacDuocRequests)
+            foreach (SP_CanhGiacDuocRequest canhGiacDuocRequest in canhGiacDuocRequests)
             {
                 CanhGiacDuoc canhGiacDuoc = await _canhGiacDuocServices.GetCanhGiacDuoc(canhGiacDuocRequest.MaCdg);
-                if(canhGiacDuoc == null) {
+                if (canhGiacDuoc == null) {
                     canhGiacDuoc = new CanhGiacDuoc
                     {
                         MaCdg = canhGiacDuocRequest.MaCdg,
@@ -324,7 +239,11 @@ namespace trackingPlatform.Service.ExternalServices
                         CongDung = canhGiacDuocRequest.CongDung,
                         TuongTacThuoc = canhGiacDuocRequest.TuongTacThuoc
                     };
-                     await _canhGiacDuocServices.AddAsync(canhGiacDuoc!);
+                    await _canhGiacDuocServices.AddAsync(canhGiacDuoc);
+                }
+                else
+                {
+                    canhGiacDuoc = UpdateCanhGiacDuocUtils.UpdateCanhGiacDuocRequest(canhGiacDuoc, canhGiacDuocRequest);
                 }
                 canhGiacDuocs.Add(canhGiacDuoc);
             }
@@ -348,6 +267,10 @@ namespace trackingPlatform.Service.ExternalServices
                         GhiChu3 = ghiChuSanPhamRequest.GhiChu3
                     };
                     await _ghiChuSanPhamServices.AddAsync(ghiChuSp!);
+                }
+                else
+                {
+                    ghiChuSp = GhiChuSpUtils.UpdateGhiChuSpRequest(ghiChuSp, ghiChuSanPhamRequest);
                 }
                 canhGiacDuocs.Add(ghiChuSp);
             }
@@ -379,6 +302,10 @@ namespace trackingPlatform.Service.ExternalServices
                     };
                     await _thongTinChinhServices.AddAsync(thongTinChinh);
                 }
+                else
+                {
+                    thongTinChinh = ThongTinChinhUtils.UpdateThongTinChinhRequest(thongTinChinh, thongTinChinhRequest);
+                }
                 thongTinChinhs.Add(thongTinChinh);
             }
             return thongTinChinhs;
@@ -407,6 +334,10 @@ namespace trackingPlatform.Service.ExternalServices
                     };
                     await _thongTinNguonGocServices.AddAsync(thongTinNguonGoc);
                 }
+                else
+                {
+                    thongTinNguonGoc = ThongTinNguoGocUtils.UpdateThongTinNguonGocRequest(thongTinNguonGoc, thongTinNguonGocRequest);
+                }
                 thongTinNguonGocs.Add(thongTinNguonGoc);
             }
             return thongTinNguonGocs;
@@ -430,6 +361,10 @@ namespace trackingPlatform.Service.ExternalServices
                        NhomTheoTt15 = thongTinPhapLyRequest.NhomTheoTt15
                     };
                     await _thongTinPhapLyServices.AddAsync(thongTinPhapLy);
+                }
+                else
+                {
+                    thongTinPhapLy = ThongTinPhapLyUtils.UpdateThongTinPhapLyRequest(thongTinPhapLy, thongTinPhapLyRequest);
                 }
                 thongTinPhapLies.Add(thongTinPhapLy);
             }
@@ -462,6 +397,10 @@ namespace trackingPlatform.Service.ExternalServices
 
                     };
                     await _thongTinNoiBoServices.AddAsync(thongTinNoiBo);
+                }
+                else
+                {
+                    thongTinNoiBo = ThongTinNoiBoUtils.UpdateThongTinNoiBoRequest(thongTinNoiBo, thongTinNoiBoRequest);
                 }
                 thongTinNoiBos.Add(thongTinNoiBo);
             }

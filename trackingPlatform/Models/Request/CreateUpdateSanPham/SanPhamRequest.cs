@@ -19,24 +19,30 @@ namespace trackingPlatform.Models.Request.CreateUpdateSanPham
         public string? MaRfid { get; set; }
 
         [BindNever]
+        [JsonIgnore]
         public string? MaDangBaoChe { get; set; }
 
         [BindNever]
+        [JsonIgnore]
         public string? MaDinhHuong { get; set; }
 
         [BindNever]
         public string? MaChuSoHuu { get; set; }
 
         [BindNever]
+        [JsonIgnore]
         public string? MaNhomKinhDoanh { get; set; }
 
         [BindNever]
+        [JsonIgnore]
         public string? MaDkbq { get; set; }
 
         [BindNever]
+        [JsonIgnore]
         public string? MaNhomKiemSoat { get; set; }
 
         [BindNever]
+        [JsonIgnore]
         public string? MaDvt { get; set; }
 
         [BindNever]
@@ -82,6 +88,7 @@ namespace trackingPlatform.Models.Request.CreateUpdateSanPham
         public string? QrCode { get; set; }
 
         [BindNever]
+        [JsonIgnore]
         public string? MaLoaiSpNoiBo { get; set; }
 
         [BindNever]
@@ -94,6 +101,8 @@ namespace trackingPlatform.Models.Request.CreateUpdateSanPham
         public string? TrangThai { get; set; }
 
         [BindNever]
+        [JsonIgnore]
+
         public string? MaGop { get; set; }
 
         [BindNever]
@@ -103,41 +112,33 @@ namespace trackingPlatform.Models.Request.CreateUpdateSanPham
         public virtual ICollection<SP_GhiChuSanPhamRequest> GhiChuSps { get; set; } = new List<SP_GhiChuSanPhamRequest>();
 
         [BindNever]
-        [JsonIgnore]
-        public virtual DangBaoChe? MaDangBaoCheNavigation { get; set; }
+        public virtual DangBaoChe? DangBaoChe { get; set; }
+
+        [BindNever]
+        public virtual DinhHuongSanPham? DinhHuongSanPham { get; set; }
+
+        [BindNever]
+        public virtual DieuKienBaoQuan DieuKienBaoQuan { get; set; }
+
+        [BindNever]
+        public virtual DonViTinh? DonViTinh { get; set; }
+
+        [BindNever]
+        public virtual SanPhamGop? SanPhamGop { get; set; }
 
         [BindNever]
         [JsonIgnore]
-        public virtual DinhHuongSanPham? MaDinhHuongNavigation { get; set; }
+        public virtual LoaiSp? LoaiSp { get; set; }
 
         [BindNever]
-        [JsonIgnore]
-        public virtual DieuKienBaoQuan? MaDkbqNavigation { get; set; }
+        public virtual LoaiSpNoiBo? LoaiSpNoiBo { get; set; }
 
         [BindNever]
-        [JsonIgnore]
-        public virtual DonViTinh? MaDvtNavigation { get; set; }
-
-        [BindNever]
-        [JsonIgnore]
-        public virtual SanPhamGop? MaGopNavigation { get; set; }
-
-        [BindNever]
-        [JsonIgnore]
-        public virtual LoaiSp? MaLoaiSpNavigation { get; set; }
-
-        [BindNever]
-        [JsonIgnore]
-        public virtual LoaiSpNoiBo? MaLoaiSpNoiBoNavigation { get; set; }
-
-        [BindNever]
-        [JsonIgnore]
-        public virtual NhomKiemSoat? MaNhomKiemSoatNavigation { get; set; }
+        public virtual NhomKiemSoat? NhomKiemSoat { get; set; }
 
 
         [BindNever]
-        [JsonIgnore]
-        public virtual NhomKinhDoanh? MaNhomKinhDoanhNavigation { get; set; }
+        public virtual NhomKinhDoanh? NhomKinhDoanh { get; set; }
 
         [BindNever]
         public virtual ICollection<SP_ThongTinChinhRequest> ThongTinChinhs { get; set; } = new List<SP_ThongTinChinhRequest>();

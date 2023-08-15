@@ -16,6 +16,10 @@ namespace trackingPlatform.Controllers
             _dinhHuongSanPhamServices = dinhHuongSanPhamServices;
         }
 
+        /// <summary>
+        /// Get Định hướng sản phẩm by maDinhHuong
+        /// </summary>
+
         [HttpGet("{maDinhHuong}")]
         public async Task<ActionResult<DinhHuongSanPham>> Get(string maDinhHuong)
         {
@@ -33,7 +37,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Get all Định hướng sản phẩm
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DinhHuongSanPham>>> Get(int top, int skip, string? filter)
         {
@@ -46,7 +52,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Create or Update Định hướng sản phẩm by 
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] List<DinhHuongSanPhamRequest> dinhHuongSanPhamRequests)
         {
@@ -59,7 +67,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Delete Định hướng sản phẩm by maDinhHuong
+        /// </summary>
         [HttpDelete("{maDinhHuongSanPham}")]
         public async Task<ActionResult> Delete(string maDinhHuongSanPham)
         {
