@@ -178,7 +178,6 @@ namespace trackingPlatform.Service.BussinessServices
                 //    sanPhamKinhDoanhs1.Add(temp);
                 //    await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs1);
                 //    thongTinNoiBos = await _manualMapper.MapListThongTinNoiBoForSanPham(sanPhamRequest.ThongTinNoiBos);
-
                 //}
                 sanPhamKinhDoanhs.Add(_manualMapper.MapSanPhamRequestForSanPham(sanPhamRequest,dangBaoChe, dinhHuongSanPham,dieuKienBaoQuan, donViTinh, sanPhamGop, loaiSp, loaiSpNoiBo, nhomKiemSoat, nhomKinhDoanh ,canhGiacDuocs, ghiChuSps, thongTinChinhs, thongTinNguonGocs, thongTinNoiBos, thongTinPhapLies));
             }
