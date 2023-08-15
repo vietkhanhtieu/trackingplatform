@@ -1,0 +1,297 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>trackingPlatform</name>
+    </assembly>
+    <members>
+        <member name="M:trackingPlatform.Controllers.CanhGiacDuocController.Get(System.String)">
+            <summary>
+            Get Cảnh giác dược by maCanhGiacDuoc
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.CanhGiacDuocController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all Cảnh giác dược
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.CanhGiacDuocController.Delete(System.String)">
+            <summary>
+            Delete Cảnh giác dược by maCanhGiacDuoc
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DangBaoCheController.Get(System.String)">
+            <summary>
+            Get Dạng bào chế by maDangBaoChe
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DangBaoCheController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all Dạng bào chế 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DangBaoCheController.Post(System.Collections.Generic.List{trackingPlatform.Models.Request.CreateUpdate.DangBaoCheRequest})">
+            <summary>
+            Create or Update Dạng bào chế 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DangBaoCheController.Delete(System.String)">
+            <summary>
+            Delete Dạng bào chế by maDangBaoChe
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DieuKienBaoQuanController.Get(System.String)">
+            <summary>
+            Get Điều kiện bảo quản by maDieuKienBaoQuan
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DieuKienBaoQuanController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all Điều kiện bảo quản 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DieuKienBaoQuanController.Post(System.Collections.Generic.List{trackingPlatform.Models.Request.CreateUpdate.DieuKienBaoQuanRequest})">
+            <summary>
+            Create or Update Điều kiện bảo quản 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DieuKienBaoQuanController.Delete(System.String)">
+            <summary>
+            Delete Điều kiện bảo quản by maDieuKienBaoQuan
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DinhHuongSanPhamController.Get(System.String)">
+            <summary>
+            Get Định hướng sản phẩm by maDinhHuong
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DinhHuongSanPhamController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all Định hướng sản phẩm
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DinhHuongSanPhamController.Post(System.Collections.Generic.List{trackingPlatform.Models.Request.CreateUpdate.DinhHuongSanPhamRequest})">
+            <summary>
+            Create or Update Định hướng sản phẩm by 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DinhHuongSanPhamController.Delete(System.String)">
+            <summary>
+            Delete Định hướng sản phẩm by maDinhHuong
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DonViTinhController.Get(System.String)">
+            <summary>
+            Get Đơn vị tính by maDonViTinh
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DonViTinhController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all Đơn vị tính 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DonViTinhController.Post(System.Collections.Generic.List{trackingPlatform.Models.Request.CreateUpdate.DonViTinhRequest})">
+            <summary>
+            Create or Đơn vị tính 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DonViTinhController.Delete(System.String)">
+            <summary>
+            Delete Đơn vị tính by maDonViTinh
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.GhiChuSpController.Get(System.String)">
+            <summary>
+            Get ghi chú sản phẩm by maGhiChuSp
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.GhiChuSpController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all ghi chú sản phẩm
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.GhiChuSpController.Delete(System.String)">
+            <summary>
+            Delete ghi chú sản phẩm by maGhiChuSp
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.LoaiSanPhamController.Get(System.String)">
+            <summary>
+            Get Loại sản phẩm by maLoaiSanPham
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.LoaiSanPhamController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all Loại sản phẩm 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.LoaiSanPhamController.Post(System.Collections.Generic.List{trackingPlatform.Models.Request.CreateUpdate.LoaiSpRequest})">
+            <summary>
+            Create or Update Loại sản phẩm
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.LoaiSanPhamController.Delete(System.String)">
+            <summary>
+            Delete Loại sản phẩm by maLoaiSanPham
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.LoaiSanPhamNoiBoController.Get(System.String)">
+            <summary>
+            Get Loại sản phẩm nội bộ by maLoaiSanPhamNoiBo
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.LoaiSanPhamNoiBoController.Get(System.Int32,System.Int32,System.String)">
+            <summary>by maLoaiSanPhamNoiBo
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.LoaiSanPhamNoiBoController.Post(System.Collections.Generic.List{trackingPlatform.Models.Request.CreateUpdate.LoaiSanPhamNoiBoRequest})">
+            <summary>
+            Create or Update Loại sản phẩm nội bộ
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.LoaiSanPhamNoiBoController.Delete(System.String)">
+            <summary>
+            Delete Loại sản phẩm nội bộ by maLoaiSanPhamNoiBo
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.NhomKiemSoatController.Get(System.String)">
+            <summary>
+            Get Nhóm kiểm soát by maNhomKiemSoat
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.NhomKiemSoatController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all Nhóm kiểm soát 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.NhomKiemSoatController.Post(System.Collections.Generic.List{trackingPlatform.Models.Request.CreateUpdate.NhomKiemSoatRequest})">
+            <summary>
+            Create or Update Nhóm kiểm soát 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.NhomKiemSoatController.Delete(System.String)">
+            <summary>
+            Delete Nhóm kiểm soát by maNhomKiemSoat
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.NhomKinhDoanhController.Get(System.String)">
+            <summary>
+            Get Nhóm kinh doanh by maNhomKinhDoanh
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.NhomKinhDoanhController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all Nhóm kinh doanh 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.NhomKinhDoanhController.Post(System.Collections.Generic.List{trackingPlatform.Models.Request.CreateUpdate.NhomKinhDoanhRequest})">
+            <summary>
+            Create or Update Nhóm kinh doanh 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.NhomKinhDoanhController.Delete(System.String)">
+            <summary>
+            Delete Nhóm kinh doanh by maNhomKinhDoanh
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.SanPhamGopController.Get(System.String)">
+            <summary>
+            Get Sản phẩm gộp by maGop
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.SanPhamGopController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all Sản phẩm gộp 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.SanPhamGopController.Post(System.Collections.Generic.List{trackingPlatform.Models.Request.CreateUpdate.SanPhamGopRequest})">
+            <summary>
+            Create or Update Sản phẩm gộp 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.SanPhamGopController.Delete(System.String)">
+            <summary>
+            Delete Sản phẩm gộp by maGop
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.SanPhamKinhDoanhController.Get(System.String)">
+            <summary>
+            Get Sản phẩm kinh doanh by maSanPham
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.SanPhamKinhDoanhController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all Sản phẩm kinh doanh
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.SanPhamKinhDoanhController.Post(System.Collections.Generic.List{trackingPlatform.Models.Request.CreateUpdateSanPham.SanPhamRequest})">
+            <summary>
+            Create or Update Sản phẩm kinh doanh 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.SanPhamKinhDoanhController.Delete(System.String)">
+            <summary>
+            Delete Sản phẩm kinh doanh by maSanPham
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.ThongTinChinhController.Get(System.String)">
+            <summary>
+            Get thông tin chính by maThongTinChinh
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.ThongTinChinhController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all thông tin chính
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.ThongTinChinhController.Delete(System.String)">
+            <summary>
+            Delete thông tin chính by maThongTinChinh
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.ThongTinNguonGocController.Get(System.String)">
+            <summary>
+            Get thông tin nguồn gốc by maThongTinNguonGoc
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.ThongTinNguonGocController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all thông tin nguồn gốc
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.ThongTinNguonGocController.Delete(System.String)">
+            <summary>
+            Delete thông tin nguồn gốc by maThongTinNguonGoc
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.ThongTinNoiBoController.Get(System.String)">
+            <summary>
+            Get thông tin nội bộ by maThongTinNoiBo
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.ThongTinNoiBoController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all thông tin nội bộ
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.ThongTinNoiBoController.Delete(System.String)">
+            <summary>
+            Delete thông tin nội bộ by maThongTinNoiBo
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.ThongTinPhapLyController.Get(System.String)">
+            <summary>
+            Get thông tin pháp lý by maThongTinPhapLy
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.ThongTinPhapLyController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all thông tin pháp lý
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.ThongTinPhapLyController.Delete(System.String)">
+            <summary>
+            Delete thông tin pháp lý by maThongTinPhapLy
+            </summary>
+        </member>
+    </members>
+</doc>

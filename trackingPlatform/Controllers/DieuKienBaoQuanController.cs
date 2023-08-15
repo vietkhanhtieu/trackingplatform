@@ -16,6 +16,9 @@ namespace trackingPlatform.Controllers
         {
             _dieuKienBaoQuanServices = dieuKienBaoQuanServices;
         }
+        /// <summary>
+        /// Get Điều kiện bảo quản by maDieuKienBaoQuan
+        /// </summary>
 
         [HttpGet("{maDieuKienBaoQuan}")]
         public async Task<ActionResult<DieuKienBaoQuan>> Get(string maDieuKienBaoQuan)
@@ -34,7 +37,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Get all Điều kiện bảo quản 
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DieuKienBaoQuan>>> Get(int top, int skip, string? filter)
         {
@@ -47,7 +52,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Create or Update Điều kiện bảo quản 
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] List<DieuKienBaoQuanRequest> dieuKienBaoQuanRequest)
         {
@@ -60,7 +67,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Delete Điều kiện bảo quản by maDieuKienBaoQuan
+        /// </summary>
         [HttpDelete("{maDieuKienBaoQuan}")]
         public async Task<ActionResult> Delete(string maDieuKienBaoQuan)
         {

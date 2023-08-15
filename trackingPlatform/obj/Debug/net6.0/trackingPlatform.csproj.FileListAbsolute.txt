@@ -111,3 +111,5 @@ D:\WORK\API\Tracking\trackingplatform\trackingPlatform\obj\Debug\net6.0\tracking
 D:\WORK\API\Tracking\trackingplatform\trackingPlatform\obj\Debug\net6.0\ref\trackingPlatform.dll
 D:\WORK\API\Tracking\trackingplatform\trackingPlatform\bin\Debug\net6.0\DateOnlyTimeOnly.AspNet.dll
 D:\WORK\API\Tracking\trackingplatform\trackingPlatform\bin\Debug\net6.0\DateOnlyTimeOnly.AspNet.Swashbuckle.dll
+D:\WORK\API\Tracking\trackingplatform\trackingPlatform\bin\Debug\net6.0\trackingPlatform.xml
+D:\WORK\API\Tracking\trackingplatform\trackingPlatform\obj\Debug\net6.0\trackingPlatform.xml

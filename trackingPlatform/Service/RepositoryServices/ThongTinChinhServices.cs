@@ -28,7 +28,7 @@ namespace trackingPlatform.Service.RepositoryServices
 
         }
 
-        public async Task<IEnumerable<ThongTinChinh>> GetAllCanhGiacDuoc(int top, int skip, string? filter)
+        public async Task<IEnumerable<ThongTinChinh>> GetAllThongTinChinh(int top, int skip, string? filter)
         {
             return await _thongTinChinhRepositoryServices.FindAllAsync(top, skip, filter);
         }

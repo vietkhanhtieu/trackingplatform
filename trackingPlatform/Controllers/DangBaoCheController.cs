@@ -18,6 +18,10 @@ namespace trackingPlatform.Controllers
             _dangBaoCheService = dangBaoCheService;
         }
 
+        /// <summary>
+        /// Get Dạng bào chế by maDangBaoChe
+        /// </summary>
+
         [HttpGet("{maDangBaoChe}")]
         public async Task<ActionResult<DangBaoChe>> Get(string maDangBaoChe)
         {
@@ -35,7 +39,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Get all Dạng bào chế 
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DangBaoChe>>> Get(int top, int skip, string? filter)
         {
@@ -48,7 +54,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Create or Update Dạng bào chế 
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] List<DangBaoCheRequest> dangBaoCheRequests)
         {
@@ -61,7 +69,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Delete Dạng bào chế by maDangBaoChe
+        /// </summary>
         [HttpDelete("{maDangBaoChe}")]
         public async Task<ActionResult> Delete(string maDangBaoChe)
         {

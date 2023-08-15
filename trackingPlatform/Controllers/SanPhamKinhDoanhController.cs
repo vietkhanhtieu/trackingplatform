@@ -18,6 +18,10 @@ namespace trackingPlatform.Controllers
             _sanPhamKinhDoanhServices = sanPhamKinhDoanhServices;
         }
 
+        /// <summary>
+        /// Get Sản phẩm kinh doanh by maSanPham
+        /// </summary>
+
         [HttpGet("{maSanPham}")]
         public async Task<ActionResult<SanPhamKinhDoanh>> Get(string maSanPham)
         {
@@ -35,7 +39,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Get all Sản phẩm kinh doanh
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SanPhamKinhDoanh>>> Get(int top, int skip, string? filter)
         {
@@ -48,6 +54,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
+        /// <summary>
+        /// Create or Update Sản phẩm kinh doanh 
+        /// </summary>
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] List<SanPhamRequest> sanPhamRequests)
@@ -62,7 +71,9 @@ namespace trackingPlatform.Controllers
             //}
             return Ok(await _sanPhamKinhDoanhServices.AddOrUpdateSanPhams(sanPhamRequests));
         }
-
+        /// <summary>
+        /// Delete Sản phẩm kinh doanh by maSanPham
+        /// </summary>
         [HttpDelete("{maSanPham}")]
         public async Task<ActionResult> Delete(string maSanPham)
         {

@@ -5,9 +5,23 @@ using trackingPlatform.Service.BussinessServices;
 using trackingPlatform.Service.ExternalServices;
 using trackingPlatform.Service.RepositoryServices;
 using System.Text.Json.Serialization;
-
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1",
+        new OpenApiInfo
+        {
+            Title = "API Product",
+            Version = "v1"
+        }
+     );
+
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
 
 // Add services to the container.
 

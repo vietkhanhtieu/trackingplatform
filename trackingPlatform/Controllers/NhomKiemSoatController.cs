@@ -15,6 +15,9 @@ namespace trackingPlatform.Controllers
         {
             _nhomKiemSoatServices = nhomKiemSoatServices;
         }
+        /// <summary>
+        /// Get Nhóm kiểm soát by maNhomKiemSoat
+        /// </summary>
 
         [HttpGet("{maNhomKiemSoat}")]
         public async Task<ActionResult<NhomKiemSoat>> Get(string maNhomKiemSoat)
@@ -33,7 +36,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Get all Nhóm kiểm soát 
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<NhomKiemSoat>>> Get(int top, int skip, string? filter)
         {
@@ -46,7 +51,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Create or Update Nhóm kiểm soát 
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] List<NhomKiemSoatRequest> nhomKiemSoatRequests)
         {
@@ -59,7 +66,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Delete Nhóm kiểm soát by maNhomKiemSoat
+        /// </summary>
         [HttpDelete("{maNhomKiemSoat}")]
         public async Task<ActionResult> Delete(string maNhomKiemSoat)
         {

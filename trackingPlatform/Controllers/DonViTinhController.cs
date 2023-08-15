@@ -17,6 +17,10 @@ namespace trackingPlatform.Controllers
             _donViTinhService = donViTinhService;
         }
 
+        /// <summary>
+        /// Get Đơn vị tính by maDonViTinh
+        /// </summary>
+
         [HttpGet("{maDonViTinh}")]
         public async Task<ActionResult<DonViTinh>> Get(string maDonViTinh)
         {
@@ -34,7 +38,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Get all Đơn vị tính 
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DonViTinh>>> Get(int top, int skip, string? filter)
         {
@@ -47,7 +53,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Create or Đơn vị tính 
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] List<DonViTinhRequest> donViTinhRequest)
         {
@@ -60,7 +68,9 @@ namespace trackingPlatform.Controllers
                 return Problem();
             }
         }
-
+        /// <summary>
+        /// Delete Đơn vị tính by maDonViTinh
+        /// </summary>
         [HttpDelete("{maDonViTinh}")]
         public async Task<ActionResult> Delete(string maDonViTinh)
         {
