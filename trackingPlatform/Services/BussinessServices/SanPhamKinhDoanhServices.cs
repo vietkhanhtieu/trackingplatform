@@ -58,6 +58,7 @@ namespace trackingPlatform.Service.BussinessServices
                 DieuKienBaoQuan dieuKienBaoQuan = null;
                 if (sanPhamRequest.DieuKienBaoQuan != null)
                 {
+                   // DieuKienBaoQuan temp = new DieuKienBaoQuan { MaDkbq = "string12", DieuKienBaoQuan1 = "temp12", MoTa ="Mota12" };
                     dieuKienBaoQuan = await _manualMapper.MapDieuKienBaoQuanForSanPham(sanPhamRequest.DieuKienBaoQuan);
                 }
                 DonViTinh donViTinh = null;
@@ -98,7 +99,7 @@ namespace trackingPlatform.Service.BussinessServices
                     canhGiacDuocs = await _manualMapper.MapListCanhGiacDuocForSanPham(sanPhamRequest.CanhGiacDuocs, sanPhamRequest.MaSanPham);
 
                 }
-               
+
                 List<GhiChuSp> ghiChuSps = null;
                 if (sanPhamKinhDoanh != null)
                 {
