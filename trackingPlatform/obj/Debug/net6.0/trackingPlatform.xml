@@ -39,6 +39,26 @@
             Delete Dạng bào chế by maDangBaoChe
             </summary>
         </member>
+        <member name="M:trackingPlatform.Controllers.DanhMucLoaiSanPhamController.Get(System.String)">
+            <summary>
+            Get Danh mục loại sản phẩm by maDanhMucLoaiSp
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DanhMucLoaiSanPhamController.Get(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all  Danh mục loại sản phẩm 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DanhMucLoaiSanPhamController.Post(System.Collections.Generic.List{trackingPlatform.Models.Request.CreateUpdate.DanhMucLoaiSpRequest})">
+            <summary>
+            Create or Update  Danh mục loại sản phẩm 
+            </summary>
+        </member>
+        <member name="M:trackingPlatform.Controllers.DanhMucLoaiSanPhamController.Delete(System.String)">
+            <summary>
+            Delete  Danh mục loại sản phẩm by maDanhMucLoaiSp
+            </summary>
+        </member>
         <member name="M:trackingPlatform.Controllers.DieuKienBaoQuanController.Get(System.String)">
             <summary>
             Get Điều kiện bảo quản by maDieuKienBaoQuan

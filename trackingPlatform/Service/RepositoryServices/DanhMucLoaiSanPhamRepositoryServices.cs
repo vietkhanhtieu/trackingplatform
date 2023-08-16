@@ -26,41 +26,41 @@ namespace trackingPlatform.Service.RepositoryServices
             return await _context.DanhMucLoaiSps.AnyAsync(dmlsp => dmlsp.MaDanhMucLsp == danhMucLoaiSp.MaDanhMucLsp);
         }
 
-        //public async Task<PostDto> AddorUpdateDanhMucLoaiSp(List<DanhMucLoaiSp> danhMucLoaiSps)
-        //{
-        //    PostDto result = new PostDto();
-        //    foreach (DanhMucLoaiSp danhMucLoaiSp in danhMucLoaiSps)
-        //    {
-        //        try
-        //        {
-        //            DanhMucLoaiSp existDmlsp = await FindByMaDanhMucLoaiSp(danhMucLoaiSp.MaDanhMucLsp);
-        //            if (existDmlsp != null)
-        //            {
-        //                DanhMucLoaiSp dmlsp = DonViTinhUtils.UpdateDonViTinh(existDvt, donViTinh);
+        public async Task<PostDto> AddorUpdateDanhMucLoaiSp(List<DanhMucLoaiSp> danhMucLoaiSps)
+        {
+            PostDto result = new PostDto();
+            foreach (DanhMucLoaiSp danhMucLoaiSp in danhMucLoaiSps)
+            {
+                try
+                {
+                    DanhMucLoaiSp existDmlsp = await FindByMaDanhMucLoaiSp(danhMucLoaiSp.MaDanhMucLsp);
+                    if (existDmlsp != null)
+                    {
+                        DanhMucLoaiSp dmlsp = DanhMucLoaiSpUtils.UpdateDanhMucLoaiSp(existDmlsp, danhMucLoaiSp);
 
-        //                await UpdateAsync(dmlsp);
-        //                result.NumberOfUpdate++;
-        //            }
-        //            else
-        //            {
-        //                await AddAsync(danhMucLoaiSp);
-        //                result.NumberOfCreate++;
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            result.NumberOfError++;
-        //            result.EntityErrors.Add(new EntityError
-        //            {
-        //                Id = danhMucLoaiSp.MaDanhMucLsp.ToString(),
-        //                Name = danhMucLoaiSp.TenDanhMucLsp,
-        //                Message = ex.Message
-        //            }
-        //            );
-        //        }
+                        await UpdateAsync(dmlsp);
+                        result.NumberOfUpdate++;
+                    }
+                    else
+                    {
+                        await AddAsync(danhMucLoaiSp);
+                        result.NumberOfCreate++;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result.NumberOfError++;
+                    result.EntityErrors.Add(new EntityError
+                    {
+                        Id = danhMucLoaiSp.MaDanhMucLsp.ToString(),
+                        Name = danhMucLoaiSp.TenDanhMucLsp,
+                        Message = ex.Message
+                    }
+                    );
+                }
 
-        //    }
-        //    return result;
-        //}
+            }
+            return result;
+        }
     }
 }

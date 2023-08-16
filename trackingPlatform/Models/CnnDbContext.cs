@@ -67,7 +67,7 @@ public partial class CnnDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=product;User Id=postgres;Password=0866449437khanh;");
+        => optionsBuilder.UseNpgsql("Server=123.30.111.94;Port=5432;Database=cnn-management;User Id=postgres;Password=postgres;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

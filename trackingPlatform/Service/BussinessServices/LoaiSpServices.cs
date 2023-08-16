@@ -61,7 +61,7 @@ namespace trackingPlatform.Service.BussinessServices
 
         private async Task<DanhMucLoaiSp> MapDanhMucLoaiSpForLoaiSanPham(string maDanhMucLoaiSp)
         {
-            DanhMucLoaiSp danhMucLoaiSp = await _danhMucLoaiSpServices.FindByMaDanhMucLoaiSP(maDanhMucLoaiSp);
+            DanhMucLoaiSp danhMucLoaiSp = await _danhMucLoaiSpServices.GetDanhMucLoaiSp(maDanhMucLoaiSp);
             if (danhMucLoaiSp == null)
             {
                 danhMucLoaiSp = new DanhMucLoaiSp
