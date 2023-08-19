@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "JoNFFNNmzO0riWDBqOgcU12LCcu+6REPeMOFr02tpkmJqaJ0v4VhYKs9NOz904sGh/S1XQ47jzmVBi6elbPaXA==",
+  "dgSpecHash": "rAAMh2DHNV4Z954Nv0IXgFN0CjNIREXiN8s468sBugouk0n6erPMK2NVfhj/7lTG/ijuMU6HblP3oW7MekV+uw==",
   "success": true,
   "projectFilePath": "D:\\WORK\\API\\Tracking\\trackingplatform\\trackingPlatform\\trackingPlatform.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Acer\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
+    "C:\\Users\\Acer\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Acer\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\Acer\\.nuget\\packages\\dateonlytimeonly.aspnet\\2.1.1\\dateonlytimeonly.aspnet.2.1.1.nupkg.sha512",
     "C:\\Users\\Acer\\.nuget\\packages\\dateonlytimeonly.aspnet.swashbuckle\\2.1.1\\dateonlytimeonly.aspnet.swashbuckle.2.1.1.nupkg.sha512",

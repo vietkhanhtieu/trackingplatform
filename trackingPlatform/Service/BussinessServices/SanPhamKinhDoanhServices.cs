@@ -3,6 +3,7 @@ using trackingPlatform.Models.Dtos;
 using trackingPlatform.Models.Request.CreateUpdateSanPham;
 using trackingPlatform.Service.ExternalServices;
 using trackingPlatform.Service.RepositoryServices;
+using trackingPlatform.Utils;
 
 namespace trackingPlatform.Service.BussinessServices
 {
@@ -41,9 +42,57 @@ namespace trackingPlatform.Service.BussinessServices
         public async Task<PostDto> AddOrUpdateSanPhams(List<SanPhamRequest> sanPhamRequests)
         {
             List<SanPhamKinhDoanh> sanPhamKinhDoanhs = new List<SanPhamKinhDoanh>();
-
+            PostDto result = new PostDto();
             foreach (SanPhamRequest sanPhamRequest in sanPhamRequests)
             {
+                if (sanPhamRequest.AmThanh.Length % 4 != 0)
+                {
+                    result.NumberOfError++;
+                    result.EntityErrors.Add(new EntityError
+                    {
+                        Id = sanPhamRequest.MaSanPham,
+                        Name = sanPhamRequest.TenSanPham,
+                        Message = "Length cua am thanh phai mod 4 == 0"
+                    }
+                    );
+                    continue;
+                }
+                if (sanPhamRequest.GiongNoi.Length % 4 != 0)
+                {
+                    result.NumberOfError++;
+                    result.EntityErrors.Add(new EntityError
+                    {
+                        Id = sanPhamRequest.MaSanPham,
+                        Name = sanPhamRequest.TenSanPham,
+                        Message = "Length cua giong noi phai mod 4 == 0"
+                    }
+                    );
+                    continue;
+                }
+                if (sanPhamRequest.QrCode.Length % 4 != 0)
+                {
+                    result.NumberOfError++;
+                    result.EntityErrors.Add(new EntityError
+                    {
+                        Id = sanPhamRequest.MaSanPham,
+                        Name = sanPhamRequest.TenSanPham,
+                        Message = "Length cua Qrcode mod 4 == 0"
+                    }
+                    );
+                    continue;
+                }
+                if (sanPhamRequest.GiongNoi.Length % 4 != 0)
+                {
+                    result.NumberOfError++;
+                    result.EntityErrors.Add(new EntityError
+                    {
+                        Id = sanPhamRequest.MaSanPham,
+                        Name = sanPhamRequest.TenSanPham,
+                        Message = "Length cua phien am phai mod 4 == 0"
+                    }
+                    );
+                    continue;
+                }
                 DangBaoChe dangBaoChe = null;
                 if (sanPhamRequest.DangBaoChe != null)
                 {
@@ -138,7 +187,7 @@ namespace trackingPlatform.Service.BussinessServices
                 
                 sanPhamKinhDoanhs.Add(_manualMapper.MapSanPhamRequestForSanPham(sanPhamRequest,dangBaoChe, dinhHuongSanPham,dieuKienBaoQuan, donViTinh, sanPhamGop, loaiSp, loaiSpNoiBo, nhomKiemSoat, nhomKinhDoanh ));
             }
-            return await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs);
+            return PostDtoUtils.UpdatePostDto(result, await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs));
         }
 
 

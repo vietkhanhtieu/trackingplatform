@@ -39,7 +39,6 @@ namespace trackingPlatform.Service.RepositoryServices
                     if (existdbc != null)
                     {
                         DangBaoChe dbc =  DangBaoCheUtils.UpdateDangBaoChe(existdbc, dangBaoChe);
-                        
                         await UpdateAsync(dbc);
                         result.NumberOfUpdate++;
                     }

@@ -54,7 +54,5 @@ namespace trackingPlatform.Service.BussinessServices
             List<DangBaoChe> dangBaoChes = _mapper.Map<List<DangBaoChe>>(dangBaoCheRequests);
             return await _dangBaoCheRepositoryServices.AddorUpdateDangBaoChes(dangBaoChes);
         }
-
-
     }
 }

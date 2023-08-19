@@ -61,7 +61,8 @@ namespace trackingPlatform.Service.RepositoryServices
             foreach (SanPhamKinhDoanh sanPhamKinhDoanh in sanPhamKinhDoanhs)
             {
                 try
-                {
+                { 
+                    
                     SanPhamKinhDoanh exitsSp = await FindAsync(sanPhamKinhDoanh.MaSanPham);
                     if (exitsSp != null)
                     {
