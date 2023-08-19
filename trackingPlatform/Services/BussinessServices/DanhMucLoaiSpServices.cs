@@ -17,9 +17,6 @@ namespace trackingPlatform.Service.BussinessServices
             _mapper = mapper;
         }
 
-        
-
-
         public async Task<DanhMucLoaiSp> GetDanhMucLoaiSp(string maDanhMuc)
         {
             return await _danhMucLoaiSanPhamRepositoryServices.FindByMaDanhMucLoaiSp(maDanhMuc);
