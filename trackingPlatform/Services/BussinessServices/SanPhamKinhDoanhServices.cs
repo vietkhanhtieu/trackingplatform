@@ -45,54 +45,54 @@ namespace trackingPlatform.Service.BussinessServices
             PostDto result = new PostDto();
             foreach (SanPhamRequest sanPhamRequest in sanPhamRequests)
             {
-                if (sanPhamRequest.AmThanh.Length % 4 != 0)
-                {
-                    result.NumberOfError++;
-                    result.EntityErrors.Add(new EntityError
-                    {
-                        Id = sanPhamRequest.MaSanPham,
-                        Name = sanPhamRequest.TenSanPham,
-                        Message = "Length cua am thanh phai mod 4 == 0"
-                    }
-                    );
-                    continue;
-                }
-                if (sanPhamRequest.GiongNoi.Length % 4 != 0)
-                {
-                    result.NumberOfError++;
-                    result.EntityErrors.Add(new EntityError
-                    {
-                        Id = sanPhamRequest.MaSanPham,
-                        Name = sanPhamRequest.TenSanPham,
-                        Message = "Length cua giong noi phai mod 4 == 0"
-                    }
-                    );
-                    continue;
-                }
-                if (sanPhamRequest.QrCode.Length % 4 != 0)
-                {
-                    result.NumberOfError++;
-                    result.EntityErrors.Add(new EntityError
-                    {
-                        Id = sanPhamRequest.MaSanPham,
-                        Name = sanPhamRequest.TenSanPham,
-                        Message = "Length cua Qrcode mod 4 == 0"
-                    }
-                    );
-                    continue;
-                }
-                if (sanPhamRequest.GiongNoi.Length % 4 != 0)
-                {
-                    result.NumberOfError++;
-                    result.EntityErrors.Add(new EntityError
-                    {
-                        Id = sanPhamRequest.MaSanPham,
-                        Name = sanPhamRequest.TenSanPham,
-                        Message = "Length cua phien am phai mod 4 == 0"
-                    }
-                    );
-                    continue;
-                }
+                //if (sanPhamRequest.AmThanh.Length % 4 != 0)
+                //{
+                //    result.NumberOfError++;
+                //    result.EntityErrors.Add(new EntityError
+                //    {
+                //        Id = sanPhamRequest.MaSanPham,
+                //        Name = sanPhamRequest.TenSanPham,
+                //        Message = "Length cua am thanh phai mod 4 == 0"
+                //    }
+                //    );
+                //    continue;
+                //}
+                //if (sanPhamRequest.GiongNoi.Length % 4 != 0)
+                //{
+                //    result.NumberOfError++;
+                //    result.EntityErrors.Add(new EntityError
+                //    {
+                //        Id = sanPhamRequest.MaSanPham,
+                //        Name = sanPhamRequest.TenSanPham,
+                //        Message = "Length cua giong noi phai mod 4 == 0"
+                //    }
+                //    );
+                //    continue;
+                //}
+                //if (sanPhamRequest.QrCode.Length % 4 != 0)
+                //{
+                //    result.NumberOfError++;
+                //    result.EntityErrors.Add(new EntityError
+                //    {
+                //        Id = sanPhamRequest.MaSanPham,
+                //        Name = sanPhamRequest.TenSanPham,
+                //        Message = "Length cua Qrcode mod 4 == 0"
+                //    }
+                //    );
+                //    continue;
+                //}
+                //if (sanPhamRequest.GiongNoi.Length % 4 != 0)
+                //{
+                //    result.NumberOfError++;
+                //    result.EntityErrors.Add(new EntityError
+                //    {
+                //        Id = sanPhamRequest.MaSanPham,
+                //        Name = sanPhamRequest.TenSanPham,
+                //        Message = "Length cua phien am phai mod 4 == 0"
+                //    }
+                //    );
+                //    continue;
+                //}
                 DangBaoChe dangBaoChe = null;
                 if (sanPhamRequest.DangBaoChe != null)
                 {

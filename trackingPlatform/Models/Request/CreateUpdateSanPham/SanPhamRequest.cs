@@ -73,19 +73,19 @@ namespace trackingPlatform.Models.Request.CreateUpdateSanPham
         public int? Active { get; set; }
 
         [BindNever]
-        public long? DonviHop { get; set; }
+        public long? DonviHop { get; set; } 
 
         [BindNever]
-        public string? AmThanh { get; set; }
+        public object? AmThanh { get; set; } = null;
 
         [BindNever]
-        public string? GiongNoi { get; set; }
+        public object? GiongNoi { get; set; } = null;
 
         [BindNever]
-        public string? PhienAm { get; set; }
+        public object? PhienAm { get; set; } = null;
 
         [BindNever]
-        public string? QrCode { get; set; }
+        public object? QrCode { get; set; } = null;
 
         [BindNever]
         [JsonIgnore]
@@ -118,7 +118,7 @@ namespace trackingPlatform.Models.Request.CreateUpdateSanPham
         public virtual DinhHuongSanPham? DinhHuongSanPham { get; set; }
 
         [BindNever]
-        public virtual DieuKienBaoQuan DieuKienBaoQuan { get; set; }
+        public virtual DieuKienBaoQuan? DieuKienBaoQuan { get; set; }
 
         [BindNever]
         public virtual DonViTinh? DonViTinh { get; set; }

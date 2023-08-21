@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OrdLGComLtTA/gpzCFzvrRSyFachWEsYiLjQffIyZHLFzD19GXqa7dsNPoGoMnOKttcPwDy7g20C5r/stb6jBg==",
+  "dgSpecHash": "rAAMh2DHNV4Z954Nv0IXgFN0CjNIREXiN8s468sBugouk0n6erPMK2NVfhj/7lTG/ijuMU6HblP3oW7MekV+uw==",
   "success": true,
-  "projectFilePath": "d:\\WORK\\API\\Tracking\\trackingplatform\\trackingPlatform\\trackingPlatform.csproj",
+  "projectFilePath": "D:\\WORK\\API\\Tracking\\trackingplatform\\trackingPlatform\\trackingPlatform.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Acer\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Acer\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
