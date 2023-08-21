@@ -1,13 +1,15 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.VisualBasic;
-using Newtonsoft.Json.Serialization;
+using trackingPlatform.Enums;
 using trackingPlatform.Models;
-using trackingPlatform.Models.Request.CreateUpdate;
 using trackingPlatform.Models.Request.CreateUpdateSanPham;
+using trackingPlatform.RestClients;
 using trackingPlatform.Service.BussinessServices;
 using trackingPlatform.Service.RepositoryServices;
 using trackingPlatform.Utils;
+using WooCommerceNET.Base;
+using WooCommerceNET.WooCommerce.v2;
+using Product = WooCommerceNET.WooCommerce.v3.Product;
+using ProductCategoryLine = WooCommerceNET.WooCommerce.v3.ProductCategoryLine;
 
 namespace trackingPlatform.Service.ExternalServices
 {
@@ -29,8 +31,13 @@ namespace trackingPlatform.Service.ExternalServices
         private readonly ThongTinNguonGocServices _thongTinNguonGocServices;
         private readonly ThongTinPhapLyServices _thongTinPhapLyServices;
         private readonly ThongTinNoiBoServices _thongTinNoiBoServices;
-
+        private readonly WooCommerceService _wooCommerceService;
         private readonly IMapper _mapper;
+
+        private const int IdDanhMucHoatChat = 258;
+        private const int IdDanhMucChungBenh = 33;
+        private const int IdDanhMucCoQuan = 466;
+        private const int BatchRange = 100;
 
         public ManualMapper(DangBaoCheService dangBaoCheService, DinhHuongSanPhamServices dinhHuongSanPhamServices, NhomKinhDoanhServices nhomKinhDoanhServices, NhomKiemSoatServices nhomKiemSoatServices, DieuKienBaoQuanServices dieuKienBaoQuanServices, DonViTinhService donViTinhService, LoaiSpNoiBoServices loaiSpNoiBoService, SanPhamGopServices sanPhamGop, DanhMucLoaiSpServices danhMucLoaiSpServices, LoaiSpServices loaiSpServices, CanhGiacDuocServices canhGiacDuocServices, GhiChuSanPhamServices ghiChuSanPhamServices, ThongTinChinhServices thongTinChinhServices,ThongTinNguonGocServices thongTinNguonGocServices, ThongTinPhapLyServices thongTinPhapLyServices, ThongTinNoiBoServices thongTinNoiBoServices, IMapper mapper)
         {
@@ -405,6 +412,92 @@ namespace trackingPlatform.Service.ExternalServices
                 thongTinNoiBos.Add(thongTinNoiBo);
             }
             return thongTinNoiBos;
+        }
+
+        private async Task<ProductCategoryLine> MapHoatChatToProductCategoryLine(HoatChat hoatChat)
+        {
+            return _mapper.Map<ProductCategoryLine>(
+                await _wooCommerceService.GetProductCategory(WooCommerceUtils.Slugify(hoatChat.TenHc)));
+        }
+
+        private async Task<List<ProductCategoryLine>> MapListHoatChatToListProductCategoryLine(List<HoatChat> hoatChats)
+        {
+            List<ProductCategoryLine> productCategoryLines = new List<ProductCategoryLine>();
+            // List<ProductCategory> productCategoriesCreate = new List<ProductCategory>();
+            foreach (HoatChat hoatChat in hoatChats)
+            {
+                ProductCategoryLine productCategoryLine = await MapHoatChatToProductCategoryLine(hoatChat);
+                if (productCategoryLine == null)
+                {
+                    // productCategoriesCreate.Add(
+                    //     new() {
+                    //         name = hoatChat.TenHc,
+                    //         parent = IdDanhMucHoatChat
+                    //     }
+                    // );
+                    productCategoryLine = _mapper.Map<ProductCategoryLine>(await _wooCommerceService.CreateHoatChat(hoatChat.TenHc));
+                }
+                productCategoryLines.Add(productCategoryLine);
+            }
+
+            return productCategoryLines;
+        }
+
+        private async Task<Product> MapSanPhamToProduct(SanPhamKinhDoanh sanPham, Product product = null!)
+        {
+            if (product == null)
+            {
+                product = new Product();
+            }
+            product.sku = sanPham.MaSanPham;
+            product.name = sanPham.TenSanPham;
+            product.status = ProductStatus.Private.ToString().ToLower();
+            product.sale_price = sanPham.GiaSauGiam;
+            product.regular_price = sanPham.GiaSauGiam;
+            product.categories = new List<ProductCategoryLine>() {
+                new() {
+                    id = IdDanhMucHoatChat
+                },
+                new() {
+                    id = IdDanhMucChungBenh
+                },
+                new() {
+                    id = IdDanhMucCoQuan
+                }
+            };
+            product.meta_data = new List<ProductMeta>() {
+                new() { key = "hoatChat", value = sanPham.HoatChatGonsa },
+                new() { key = "congDung", value = sanPham.CongDungChiDinh },
+                new() { key = "lieuDung", value = sanPham.LieuDung },
+                new() { key = "dieuKienBaoQuan", value = sanPham.DieuKienBaoQuan },
+                new() { key = "tacDungPhu", value = sanPham.TacDungPhu },
+                new() { key = "tenThuongMai", value = sanPham.TenThuongMai },
+                new() { key = "dangBaoChe", value = sanPham.DangBaoChe },
+                new() { key = "dvtCoSo", value = sanPham.DonViTinh }
+            };
+            product.categories.AddRange(await MapListHoatChatToListProductCategoryLine(sanPham.IdHoatChats.ToList()));
+            return product;
+        }
+
+        public async Task<BatchObject<Product>> MapListSanPhamToProductBatch(List<SanPhamKinhDoanh> sanPhams)
+        {
+            BatchObject<Product> productBatch = WooCommerceUtils.initBatch<Product>();
+
+            foreach (SanPhamKinhDoanh sanPham in sanPhams)
+            {
+                Product curProduct = await _wooCommerceService.GetProduct(sanPham.MaSanPham);
+                Product createOrUpdateProduct = await MapSanPhamToProduct(sanPham, curProduct);
+                if (curProduct == null)
+                {
+                    productBatch.create.Add(createOrUpdateProduct);
+                }
+                else
+                {
+                    createOrUpdateProduct.id = curProduct.id;
+                    productBatch.update.Add(createOrUpdateProduct);
+                }
+            }
+            return productBatch;
         }
     }
 }

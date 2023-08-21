@@ -1,9 +1,12 @@
 ﻿using trackingPlatform.Models;
 using trackingPlatform.Models.Dtos;
 using trackingPlatform.Models.Request.CreateUpdateSanPham;
+using trackingPlatform.RestClients;
 using trackingPlatform.Service.ExternalServices;
 using trackingPlatform.Service.RepositoryServices;
 using trackingPlatform.Utils;
+using WooCommerceNET.Base;
+using WooCommerceNET.WooCommerce.v3;
 
 namespace trackingPlatform.Service.BussinessServices
 {
@@ -12,11 +15,14 @@ namespace trackingPlatform.Service.BussinessServices
 
         private readonly SanPhamKinhDoanhRepositoryServices _sanPhamKinhDoanhRepositoryService;
         private readonly ManualMapper _manualMapper;
+        private readonly WooCommerceService _wooCommerceService;
+        private const int BatchRange = 100;
 
-        public SanPhamKinhDoanhServices(SanPhamKinhDoanhRepositoryServices sanPhamKinhDoanhRepositoryServices, ManualMapper manualMapper)
+        public SanPhamKinhDoanhServices(SanPhamKinhDoanhRepositoryServices sanPhamKinhDoanhRepositoryServices, ManualMapper manualMapper, WooCommerceService wooCommerceService)
         {
             _sanPhamKinhDoanhRepositoryService = sanPhamKinhDoanhRepositoryServices;
             _manualMapper = manualMapper;
+            _wooCommerceService = wooCommerceService;
         }
 
         public async Task<SanPhamKinhDoanh> GetSanPhamKinhDoanh(string MaSanPham)
@@ -39,7 +45,7 @@ namespace trackingPlatform.Service.BussinessServices
             return sanPham;
         }
 
-        public async Task<PostDto> AddOrUpdateSanPhams(List<SanPhamRequest> sanPhamRequests)
+        public async Task<SyncEcDto> AddOrUpdateSanPhams(List<SanPhamRequest> sanPhamRequests)
         {
             List<SanPhamKinhDoanh> sanPhamKinhDoanhs = new List<SanPhamKinhDoanh>();
             PostDto result = new PostDto();
@@ -187,15 +193,28 @@ namespace trackingPlatform.Service.BussinessServices
                 
                 sanPhamKinhDoanhs.Add(_manualMapper.MapSanPhamRequestForSanPham(sanPhamRequest,dangBaoChe, dinhHuongSanPham,dieuKienBaoQuan, donViTinh, sanPhamGop, loaiSp, loaiSpNoiBo, nhomKiemSoat, nhomKinhDoanh ));
             }
-            return PostDtoUtils.UpdatePostDto(result, await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs));
+            PostDto cnnDbResult = await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhamKinhDoanhs);
+
+            PostDto ecDbResult = await SyncProductsToEc(sanPhamKinhDoanhs);
+
+            return new SyncEcDto(cnnDbResult, ecDbResult);
         }
 
-
-        //public async Task<PostDto> AddOrUpdateSanPhams(List<SanPhamRequest> sanPhamRequests)
-        //{
-        //    List<SanPhamKinhDoanh> temp = await _manualMapper.MapListSanPhamRequestForListSanPham(sanPhamRequests);
-        //    List<SanPhamKinhDoanh> sanPhams = temp;
-        //    return await _sanPhamKinhDoanhRepositoryService.AddOrUpdateSanPhams(sanPhams);
-        //}
+        public async Task<PostDto> SyncProductsToEc(List<SanPhamKinhDoanh> sanPhams)
+        {
+            PostDto result = new PostDto();
+            List<BatchObject<Product>> productBatches = new List<BatchObject<Product>>();
+            for (int start = 0; start < sanPhams.Count(); start += BatchRange)
+            {
+                int end = start + BatchRange > sanPhams.Count() ? sanPhams.Count() : start + BatchRange;
+                productBatches.Add(await _manualMapper.MapSanPhamsToProductBatch(sanPhams.GetRange(start, end)));
+            }
+            foreach (BatchObject<Product> productBatch in await _wooCommerceService.BatchUpdateProducts(productBatches))
+            {
+                result.NumberOfCreate += productBatch.create?.Count ?? 0;
+                result.NumberOfUpdate += productBatch.update?.Count ?? 0;
+            }
+            return result;
+        }
     }
 }
