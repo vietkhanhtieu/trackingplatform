@@ -73,7 +73,7 @@ namespace trackingPlatform.Models.Request.CreateUpdateSanPham
         public int? Active { get; set; }
 
         [BindNever]
-        public long? DonviHop { get; set; } 
+        public decimal? DonviHop { get; set; } 
 
         [BindNever]
         public object? AmThanh { get; set; } = null;
