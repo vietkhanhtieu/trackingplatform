@@ -51,6 +51,14 @@ namespace trackingPlatform.Service.BussinessServices
             PostDto result = new PostDto();
             foreach (SanPhamRequest sanPhamRequest in sanPhamRequests)
             {
+
+                // Workaround
+                sanPhamRequest.AmThanh = null;
+                sanPhamRequest.GiongNoi = null;
+                sanPhamRequest.PhienAm = null;
+                sanPhamRequest.QrCode = null;
+                sanPhamRequest.MaLoaiSp = null;
+
                 //if (sanPhamRequest.AmThanh.Length % 4 != 0)
                 //{
                 //    result.NumberOfError++;
@@ -207,7 +215,7 @@ namespace trackingPlatform.Service.BussinessServices
             for (int start = 0; start < sanPhams.Count(); start += BatchRange)
             {
                 int end = start + BatchRange > sanPhams.Count() ? sanPhams.Count() : start + BatchRange;
-                productBatches.Add(await _manualMapper.MapSanPhamsToProductBatch(sanPhams.GetRange(start, end)));
+                productBatches.Add(await _manualMapper.MapListSanPhamToProductBatch(sanPhams.GetRange(start, end)));
             }
             foreach (BatchObject<Product> productBatch in await _wooCommerceService.BatchUpdateProducts(productBatches))
             {

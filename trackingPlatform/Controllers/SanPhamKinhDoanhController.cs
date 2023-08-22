@@ -61,15 +61,14 @@ namespace trackingPlatform.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] List<SanPhamRequest> sanPhamRequests)
         {
-            //try
-            //{
-            //    return Ok(await _sanPhamKinhDoanhServices.AddOrUpdateSanPhams(sanPhamRequests));
-            //}
-            //catch
-            //{
-            //    return Problem();
-            //}
-            return Ok(await _sanPhamKinhDoanhServices.AddOrUpdateSanPhams(sanPhamRequests));
+            try
+            {
+                return Ok(await _sanPhamKinhDoanhServices.AddOrUpdateSanPhams(sanPhamRequests));
+            }
+            catch
+            {
+                return Problem();
+            }
         }
         /// <summary>
         /// Delete Sản phẩm kinh doanh by maSanPham

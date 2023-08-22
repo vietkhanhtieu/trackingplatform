@@ -39,7 +39,7 @@ namespace trackingPlatform.Service.ExternalServices
         private const int IdDanhMucCoQuan = 466;
         private const int BatchRange = 100;
 
-        public ManualMapper(DangBaoCheService dangBaoCheService, DinhHuongSanPhamServices dinhHuongSanPhamServices, NhomKinhDoanhServices nhomKinhDoanhServices, NhomKiemSoatServices nhomKiemSoatServices, DieuKienBaoQuanServices dieuKienBaoQuanServices, DonViTinhService donViTinhService, LoaiSpNoiBoServices loaiSpNoiBoService, SanPhamGopServices sanPhamGop, DanhMucLoaiSpServices danhMucLoaiSpServices, LoaiSpServices loaiSpServices, CanhGiacDuocServices canhGiacDuocServices, GhiChuSanPhamServices ghiChuSanPhamServices, ThongTinChinhServices thongTinChinhServices,ThongTinNguonGocServices thongTinNguonGocServices, ThongTinPhapLyServices thongTinPhapLyServices, ThongTinNoiBoServices thongTinNoiBoServices, IMapper mapper)
+        public ManualMapper(DangBaoCheService dangBaoCheService, DinhHuongSanPhamServices dinhHuongSanPhamServices, NhomKinhDoanhServices nhomKinhDoanhServices, NhomKiemSoatServices nhomKiemSoatServices, DieuKienBaoQuanServices dieuKienBaoQuanServices, DonViTinhService donViTinhService, LoaiSpNoiBoServices loaiSpNoiBoService, SanPhamGopServices sanPhamGop, DanhMucLoaiSpServices danhMucLoaiSpServices, LoaiSpServices loaiSpServices, CanhGiacDuocServices canhGiacDuocServices, GhiChuSanPhamServices ghiChuSanPhamServices, ThongTinChinhServices thongTinChinhServices,ThongTinNguonGocServices thongTinNguonGocServices, ThongTinPhapLyServices thongTinPhapLyServices, ThongTinNoiBoServices thongTinNoiBoServices, IMapper mapper, WooCommerceService wooCommerceService)
         {
             _dangBaoCheService = dangBaoCheService;
             _dinhHuongSanPhamService = dinhHuongSanPhamServices;
@@ -58,6 +58,7 @@ namespace trackingPlatform.Service.ExternalServices
             _thongTinPhapLyServices = thongTinPhapLyServices;
             _thongTinNguonGocServices = thongTinNguonGocServices;
             _thongTinNoiBoServices = thongTinNoiBoServices;
+            _wooCommerceService = wooCommerceService;
             _mapper = mapper;
         }
 
@@ -414,28 +415,39 @@ namespace trackingPlatform.Service.ExternalServices
             return thongTinNoiBos;
         }
 
-        private async Task<ProductCategoryLine> MapHoatChatToProductCategoryLine(HoatChat hoatChat)
+        //private async Task<List<ProductCategoryLine>> MapListHoatChatToListProductCategoryLine(List<HoatChat> hoatChats)
+        //{
+        //    List<ProductCategoryLine> productCategoryLines = new List<ProductCategoryLine>();
+        //    // List<ProductCategory> productCategoriesCreate = new List<ProductCategory>();
+        //    foreach (HoatChat hoatChat in hoatChats)
+        //    {
+        //        ProductCategoryLine productCategoryLine = await MapNameToProductCategoryLine(hoatChat.TenHc);
+        //        if (productCategoryLine == null)
+        //        {
+        //            productCategoryLine = _mapper.Map<ProductCategoryLine>(await _wooCommerceService.CreateHoatChat(hoatChat.TenHc));
+        //        }
+        //        productCategoryLines.Add(productCategoryLine);
+        //    }
+
+        //    return productCategoryLines;
+        //}
+
+        private async Task<ProductCategoryLine> MapNameToProductCategoryLine(string name)
         {
             return _mapper.Map<ProductCategoryLine>(
-                await _wooCommerceService.GetProductCategory(WooCommerceUtils.Slugify(hoatChat.TenHc)));
+                await _wooCommerceService.GetProductCategory(WooCommerceUtils.Slugify(name)));
         }
 
-        private async Task<List<ProductCategoryLine>> MapListHoatChatToListProductCategoryLine(List<HoatChat> hoatChats)
+        private async Task<List<ProductCategoryLine>> MapListNhaSanXuatToListProductCategoryLine(List<string> nhaSanXuats)
         {
             List<ProductCategoryLine> productCategoryLines = new List<ProductCategoryLine>();
             // List<ProductCategory> productCategoriesCreate = new List<ProductCategory>();
-            foreach (HoatChat hoatChat in hoatChats)
+            foreach (string nsx in nhaSanXuats)
             {
-                ProductCategoryLine productCategoryLine = await MapHoatChatToProductCategoryLine(hoatChat);
+                ProductCategoryLine productCategoryLine = await MapNameToProductCategoryLine(nsx);
                 if (productCategoryLine == null)
                 {
-                    // productCategoriesCreate.Add(
-                    //     new() {
-                    //         name = hoatChat.TenHc,
-                    //         parent = IdDanhMucHoatChat
-                    //     }
-                    // );
-                    productCategoryLine = _mapper.Map<ProductCategoryLine>(await _wooCommerceService.CreateHoatChat(hoatChat.TenHc));
+                    productCategoryLine = _mapper.Map<ProductCategoryLine>(await _wooCommerceService.CreateNhaSanXuat(nsx));
                 }
                 productCategoryLines.Add(productCategoryLine);
             }
@@ -452,30 +464,20 @@ namespace trackingPlatform.Service.ExternalServices
             product.sku = sanPham.MaSanPham;
             product.name = sanPham.TenSanPham;
             product.status = ProductStatus.Private.ToString().ToLower();
-            product.sale_price = sanPham.GiaSauGiam;
-            product.regular_price = sanPham.GiaSauGiam;
-            product.categories = new List<ProductCategoryLine>() {
-                new() {
-                    id = IdDanhMucHoatChat
-                },
-                new() {
-                    id = IdDanhMucChungBenh
-                },
-                new() {
-                    id = IdDanhMucCoQuan
-                }
-            };
+            product.sale_price = (decimal?) sanPham.GiaCoVat;
+            product.regular_price = (decimal?) sanPham.GiaCoVat;
+            product.categories = new List<ProductCategoryLine>();
             product.meta_data = new List<ProductMeta>() {
-                new() { key = "hoatChat", value = sanPham.HoatChatGonsa },
-                new() { key = "congDung", value = sanPham.CongDungChiDinh },
-                new() { key = "lieuDung", value = sanPham.LieuDung },
-                new() { key = "dieuKienBaoQuan", value = sanPham.DieuKienBaoQuan },
-                new() { key = "tacDungPhu", value = sanPham.TacDungPhu },
+                new() { key = "hoatChat", value = string.Join("; ", sanPham.ThongTinChinhs.Select(ThongTinChinh => ThongTinChinh.HoatChat)) },
+                new() { key = "congDung", value = string.Join("; ", sanPham.CanhGiacDuocs.Select(CanhGiacDuoc => CanhGiacDuoc.CongDung)) },
+                new() { key = "lieuDung", value = string.Join("; ", sanPham.ThongTinChinhs.Select(ThongTinChinh => ThongTinChinh.LieuDung)) },
+                new() { key = "dieuKienBaoQuan", value = sanPham.MaDkbqNavigation.DieuKienBaoQuan1 },
+                new() { key = "tacDungPhu", value = string.Join("; ", sanPham.CanhGiacDuocs.Select(CanhGiacDuoc => CanhGiacDuoc.TacDungPhu)) },
                 new() { key = "tenThuongMai", value = sanPham.TenThuongMai },
-                new() { key = "dangBaoChe", value = sanPham.DangBaoChe },
-                new() { key = "dvtCoSo", value = sanPham.DonViTinh }
+                new() { key = "dangBaoChe", value = sanPham.MaDangBaoCheNavigation.DangBaoChe1 },
+                new() { key = "dvtCoSo", value = sanPham.MaDvtNavigation.DvtCoSo }
             };
-            product.categories.AddRange(await MapListHoatChatToListProductCategoryLine(sanPham.IdHoatChats.ToList()));
+            //product.categories.AddRange(await MapListHoatChatToListProductCategoryLine(sanPham.IdHoatChats.ToList()));
             return product;
         }
 

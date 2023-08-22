@@ -20,6 +20,7 @@ namespace trackingPlatform.RestClients
         private const ulong IdDanhMucHoatChat = 258;
         private const ulong IdDanhMucChungBenh = 33;
         private const ulong IdDanhMucCoQuan = 466;
+        private const ulong IdNhaSanXuat = 466;
 
         private RestAPI _wooRestApi;
 
@@ -66,6 +67,13 @@ namespace trackingPlatform.RestClients
         {
             ProductCategory productCategory = await CreateProductCategory(name);
             productCategory.parent = IdDanhMucCoQuan;
+            return await UpdateProductCategory(productCategory);
+        }
+
+        public async Task<ProductCategory> CreateNhaSanXuat(string name)
+        {
+            ProductCategory productCategory = await CreateProductCategory(name);
+            productCategory.parent = IdNhaSanXuat;
             return await UpdateProductCategory(productCategory);
         }
 

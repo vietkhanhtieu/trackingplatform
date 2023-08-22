@@ -6,6 +6,7 @@ using trackingPlatform.Service.ExternalServices;
 using trackingPlatform.Service.RepositoryServices;
 using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
+using trackingPlatform.RestClients;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSwaggerGen(c =>
@@ -87,6 +88,7 @@ builder.Services.AddScoped<DieuKienBaoQuanRepositoryService>();
 builder.Services.AddScoped<NhomKinhDoanhRepositoryServices>();
 builder.Services.AddScoped<DinhHuongSanPhamRepositoryServices>();
 builder.Services.AddScoped<DangBaoCheRepositoryServices>();
+builder.Services.AddScoped<WooCommerceService>();
 
 var app = builder.Build();
 
