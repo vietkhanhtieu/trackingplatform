@@ -48,7 +48,6 @@ namespace trackingPlatform.Service.BussinessServices
         public async Task<SyncEcDto> AddOrUpdateSanPhams(List<SanPhamRequest> sanPhamRequests)
         {
             List<SanPhamKinhDoanh> sanPhamKinhDoanhs = new List<SanPhamKinhDoanh>();
-            PostDto result = new PostDto();
             foreach (SanPhamRequest sanPhamRequest in sanPhamRequests)
             {
 
@@ -206,6 +205,164 @@ namespace trackingPlatform.Service.BussinessServices
             PostDto ecDbResult = await SyncProductsToEc(sanPhamKinhDoanhs);
 
             return new SyncEcDto(cnnDbResult, ecDbResult);
+        }
+
+        public async Task<PostDto> AddOrUpdateSanPhamsSyncEc(List<SanPhamRequest> sanPhamRequests)
+        {
+            List<SanPhamKinhDoanh> sanPhamKinhDoanhs = new List<SanPhamKinhDoanh>();
+            foreach (SanPhamRequest sanPhamRequest in sanPhamRequests)
+            {
+
+                // Workaround
+                sanPhamRequest.AmThanh = null;
+                sanPhamRequest.GiongNoi = null;
+                sanPhamRequest.PhienAm = null;
+                sanPhamRequest.QrCode = null;
+                sanPhamRequest.MaLoaiSp = null;
+
+                //if (sanPhamRequest.AmThanh.Length % 4 != 0)
+                //{
+                //    result.NumberOfError++;
+                //    result.EntityErrors.Add(new EntityError
+                //    {
+                //        Id = sanPhamRequest.MaSanPham,
+                //        Name = sanPhamRequest.TenSanPham,
+                //        Message = "Length cua am thanh phai mod 4 == 0"
+                //    }
+                //    );
+                //    continue;
+                //}
+                //if (sanPhamRequest.GiongNoi.Length % 4 != 0)
+                //{
+                //    result.NumberOfError++;
+                //    result.EntityErrors.Add(new EntityError
+                //    {
+                //        Id = sanPhamRequest.MaSanPham,
+                //        Name = sanPhamRequest.TenSanPham,
+                //        Message = "Length cua giong noi phai mod 4 == 0"
+                //    }
+                //    );
+                //    continue;
+                //}
+                //if (sanPhamRequest.QrCode.Length % 4 != 0)
+                //{
+                //    result.NumberOfError++;
+                //    result.EntityErrors.Add(new EntityError
+                //    {
+                //        Id = sanPhamRequest.MaSanPham,
+                //        Name = sanPhamRequest.TenSanPham,
+                //        Message = "Length cua Qrcode mod 4 == 0"
+                //    }
+                //    );
+                //    continue;
+                //}
+                //if (sanPhamRequest.GiongNoi.Length % 4 != 0)
+                //{
+                //    result.NumberOfError++;
+                //    result.EntityErrors.Add(new EntityError
+                //    {
+                //        Id = sanPhamRequest.MaSanPham,
+                //        Name = sanPhamRequest.TenSanPham,
+                //        Message = "Length cua phien am phai mod 4 == 0"
+                //    }
+                //    );
+                //    continue;
+                //}
+                DangBaoChe dangBaoChe = null;
+                if (sanPhamRequest.DangBaoChe != null)
+                {
+                    dangBaoChe = await _manualMapper.MapDangBaoCheForSanPham(sanPhamRequest.DangBaoChe);
+                }
+
+                DinhHuongSanPham dinhHuongSanPham = null;
+                if (sanPhamRequest.DinhHuongSanPham != null)
+                {
+                    dinhHuongSanPham = await _manualMapper.MapDinhHuongSanPhamForSanPham(sanPhamRequest.DinhHuongSanPham);
+                }
+                DieuKienBaoQuan dieuKienBaoQuan = null;
+                if (sanPhamRequest.DieuKienBaoQuan != null)
+                {
+                    // DieuKienBaoQuan temp = new DieuKienBaoQuan { MaDkbq = "string12", DieuKienBaoQuan1 = "temp12", MoTa ="Mota12" };
+                    dieuKienBaoQuan = await _manualMapper.MapDieuKienBaoQuanForSanPham(sanPhamRequest.DieuKienBaoQuan);
+                }
+                DonViTinh donViTinh = null;
+                if (sanPhamRequest.DonViTinh != null)
+                {
+                    donViTinh = await _manualMapper.MapDonViTinhForSanPham(sanPhamRequest.DonViTinh);
+                }
+                LoaiSp loaiSp = null;
+                if (sanPhamRequest.MaLoaiSp != null)
+                {
+                    loaiSp = await _manualMapper.MapLoaiSanPhamForSanPham(sanPhamRequest.MaLoaiSp);
+                }
+                SanPhamGop sanPhamGop = null;
+                if (sanPhamRequest.SanPhamGop != null)
+                {
+                    sanPhamGop = await _manualMapper.MapSanPhamGopForSanPham(sanPhamRequest.SanPhamGop);
+                }
+                LoaiSpNoiBo loaiSpNoiBo = null;
+                if (sanPhamRequest.LoaiSpNoiBo != null)
+                {
+                    loaiSpNoiBo = await _manualMapper.MapLoaiSanPhamNoiBoForSanPham(sanPhamRequest.LoaiSpNoiBo);
+                }
+                NhomKiemSoat nhomKiemSoat = null;
+                if (sanPhamRequest.NhomKiemSoat != null)
+                {
+                    nhomKiemSoat = await _manualMapper.MapNhomKiemSoatForSanPham(sanPhamRequest.NhomKiemSoat);
+                }
+                NhomKinhDoanh nhomKinhDoanh = null;
+                if (sanPhamRequest.NhomKinhDoanh != null)
+                {
+                    nhomKinhDoanh = await _manualMapper.MapNhomKinhDoanhForSanPham(sanPhamRequest.NhomKinhDoanh);
+                }
+                SanPhamKinhDoanh sanPhamKinhDoanh = await GetSanPhamKinhDoanh(sanPhamRequest.MaSanPham);
+
+                List<CanhGiacDuoc> canhGiacDuocs = null;
+                if (sanPhamKinhDoanh != null)
+                {
+                    canhGiacDuocs = await _manualMapper.MapListCanhGiacDuocForSanPham(sanPhamRequest.CanhGiacDuocs, sanPhamRequest.MaSanPham);
+
+                }
+
+                List<GhiChuSp> ghiChuSps = null;
+                if (sanPhamKinhDoanh != null)
+                {
+                    ghiChuSps = await _manualMapper.MapListGhiChuSpForSanPham(sanPhamRequest.GhiChuSps, sanPhamRequest.MaSanPham);
+
+                }
+
+                List<ThongTinChinh> thongTinChinhs = null;
+                if (sanPhamKinhDoanh != null)
+                {
+                    thongTinChinhs = await _manualMapper.MapListThongTinChinhForSanPham(sanPhamRequest.ThongTinChinhs, sanPhamRequest.MaSanPham);
+
+                }
+
+                List<ThongTinNguonGoc> thongTinNguonGocs = null;
+                if (sanPhamKinhDoanh != null)
+                {
+                    thongTinNguonGocs = await _manualMapper.MapListThongTinNguonGocForSanPham(sanPhamRequest.ThongTinNguonGocs, sanPhamRequest.MaSanPham);
+
+                }
+
+
+                List<ThongTinPhapLy> thongTinPhapLies = null;
+                if (sanPhamKinhDoanh != null)
+                {
+                    thongTinPhapLies = await _manualMapper.MapListThongTinPhapLyForSanPham(sanPhamRequest.ThongTinPhapLies, sanPhamRequest.MaSanPham);
+
+                }
+
+                List<ThongTinNoiBo> thongTinNoiBos = null;
+                if (sanPhamKinhDoanh != null)
+                {
+                    thongTinNoiBos = await _manualMapper.MapListThongTinNoiBoForSanPham(sanPhamRequest.ThongTinNoiBos, sanPhamRequest.MaSanPham);
+
+                }
+
+                sanPhamKinhDoanhs.Add(_manualMapper.MapSanPhamRequestForSanPham(sanPhamRequest, dangBaoChe, dinhHuongSanPham, dieuKienBaoQuan, donViTinh, sanPhamGop, loaiSp, loaiSpNoiBo, nhomKiemSoat, nhomKinhDoanh));
+            }
+            return await SyncProductsToEc(sanPhamKinhDoanhs);
         }
 
         public async Task<PostDto> SyncProductsToEc(List<SanPhamKinhDoanh> sanPhams)
