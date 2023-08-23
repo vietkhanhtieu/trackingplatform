@@ -38,6 +38,11 @@ namespace trackingPlatform.Service.RepositoryServices
             await _thongTinChinhRepositoryServices.AddAsync(thongTinChinh);
         }
 
+        public async Task UpdateAsync(ThongTinChinh thongTinChinh)
+        {
+            await _thongTinChinhRepositoryServices.UpdateAsync(thongTinChinh);
+        }
+
         public async Task<ThongTinChinh> DeleteAsync(string maTTC)
         {
             ThongTinChinh thongTinChinh = await GetThongTinChinh(maTTC);

@@ -154,21 +154,21 @@ namespace trackingPlatform.Service.ExternalServices
             return sanPhamGop;
         }
 
-        public async Task<LoaiSp> MapLoaiSanPhamForSanPham(string maLoaiSp)
+        public async Task<LoaiSp> MapLoaiSanPhamForSanPham(LoaiSp loaiSp)
         {
-            LoaiSp loaiSp = await _loaiSpServices.GetLoaisp(maLoaiSp);
-            if (loaiSp == null)
+            LoaiSp lsp = await _loaiSpServices.GetLoaisp(loaiSp.MaLoaiSp);
+            if (lsp == null)
             {
-                loaiSp = new LoaiSp
+                lsp = new LoaiSp
                 {
-                    MaLoaiSp = maLoaiSp,
-                    TenLoaiSp = "",
-                    DinhNghia = "",
-                    MaDanhMucLsp = "" // maDanhMucLoaiSp Phai la so va tu tang.
+                    MaLoaiSp = loaiSp.MaLoaiSp,
+                    TenLoaiSp = loaiSp.TenLoaiSp,
+                    DinhNghia = loaiSp.DinhNghia,
+                    MaDanhMucLspNavigation = loaiSp.MaDanhMucLspNavigation
                 };
-                await _loaiSpServices.AddAsync(loaiSp);
+                await _loaiSpServices.AddAsync(lsp);
             }
-            return loaiSp;
+            return lsp;
         }
 
         public async Task<LoaiSpNoiBo> MapLoaiSanPhamNoiBoForSanPham(LoaiSpNoiBo lspnb)
@@ -244,6 +244,7 @@ namespace trackingPlatform.Service.ExternalServices
                 else
                 {
                     canhGiacDuoc = UpdateCanhGiacDuocUtils.UpdateCanhGiacDuocRequest(canhGiacDuoc, canhGiacDuocRequest);
+                    _canhGiacDuocServices.UpdateAsync(canhGiacDuoc);
                 }
                 canhGiacDuocs.Add(canhGiacDuoc);
             }
@@ -271,6 +272,7 @@ namespace trackingPlatform.Service.ExternalServices
                 else
                 {
                     ghiChuSp = GhiChuSpUtils.UpdateGhiChuSpRequest(ghiChuSp, ghiChuSanPhamRequest);
+                    _ghiChuSanPhamServices.UpdateAsync(ghiChuSp);
                 }
                 canhGiacDuocs.Add(ghiChuSp);
             }
@@ -305,6 +307,7 @@ namespace trackingPlatform.Service.ExternalServices
                 else
                 {
                     thongTinChinh = ThongTinChinhUtils.UpdateThongTinChinhRequest(thongTinChinh, thongTinChinhRequest);
+                    _thongTinChinhServices.UpdateAsync(thongTinChinh);
                 }
                 thongTinChinhs.Add(thongTinChinh);
             }
@@ -337,6 +340,7 @@ namespace trackingPlatform.Service.ExternalServices
                 else
                 {
                     thongTinNguonGoc = ThongTinNguoGocUtils.UpdateThongTinNguonGocRequest(thongTinNguonGoc, thongTinNguonGocRequest);
+                    _thongTinNguonGocServices.UpdateAsync(thongTinNguonGoc);
                 }
                 thongTinNguonGocs.Add(thongTinNguonGoc);
             }
@@ -365,6 +369,7 @@ namespace trackingPlatform.Service.ExternalServices
                 else
                 {
                     thongTinPhapLy = ThongTinPhapLyUtils.UpdateThongTinPhapLyRequest(thongTinPhapLy, thongTinPhapLyRequest);
+                    _thongTinPhapLyServices.AddAsync(thongTinPhapLy);
                 }
                 thongTinPhapLies.Add(thongTinPhapLy);
             }
@@ -394,13 +399,14 @@ namespace trackingPlatform.Service.ExternalServices
                         XinCapPhepQc = thongTinNoiBoRequest.XinCapPhepQc,
                         DaDuocCapPhepTtThuocQc = thongTinNoiBoRequest.DaDuocCapPhepTtThuocQc,
                         TinhTrangToRoiNcc = thongTinNoiBoRequest.TinhTrangToRoiNcc
-
                     };
                     await _thongTinNoiBoServices.AddAsync(thongTinNoiBo);
                 }
                 else
                 {
                     thongTinNoiBo = ThongTinNoiBoUtils.UpdateThongTinNoiBoRequest(thongTinNoiBo, thongTinNoiBoRequest);
+                    _thongTinNoiBoServices.AddAsync(thongTinNoiBo);
+
                 }
                 thongTinNoiBos.Add(thongTinNoiBo);
             }

@@ -116,9 +116,9 @@ namespace trackingPlatform.Service.BussinessServices
                     donViTinh = await _manualMapper.MapDonViTinhForSanPham(sanPhamRequest.DonViTinh);
                 }
                 LoaiSp loaiSp = null;
-                if (sanPhamRequest.MaLoaiSp != null)
+                if (sanPhamRequest.LoaiSp != null)
                 {
-                    loaiSp = await _manualMapper.MapLoaiSanPhamForSanPham(sanPhamRequest.MaLoaiSp);
+                    loaiSp = await _manualMapper.MapLoaiSanPhamForSanPham(sanPhamRequest.LoaiSp);
                 }
                 SanPhamGop sanPhamGop = null;
                 if (sanPhamRequest.SanPhamGop != null)

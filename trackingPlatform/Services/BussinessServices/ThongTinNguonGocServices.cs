@@ -35,7 +35,10 @@ namespace trackingPlatform.Service.BussinessServices
         {
             await _thongTinNguonGocRepositoryServices.AddAsync(thongTinNguonGoc);
         }
-
+        public async Task UpdateAsync(ThongTinNguonGoc thongTinNguonGoc)
+        {
+            await _thongTinNguonGocRepositoryServices.UpdateAsync(thongTinNguonGoc);
+        }
         public async Task<ThongTinNguonGoc> DeleteAsync(string maTTNG)
         {
             ThongTinNguonGoc thongTinNguonGoc = await GetThongTinNguonGoc(maTTNG);

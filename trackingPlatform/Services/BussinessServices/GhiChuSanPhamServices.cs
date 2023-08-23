@@ -36,6 +36,11 @@ namespace trackingPlatform.Service.BussinessServices
             await _ghiChuSanPhamRepositoryServices.AddAsync(ghiChuSp);
         }
 
+        public async Task UpdateAsync(GhiChuSp ghiChuSp)
+        {
+            await _ghiChuSanPhamRepositoryServices.UpdateAsync(ghiChuSp);
+        }
+
         public async Task<GhiChuSp> DeleteAsync(string maGhiChu)
         {
             GhiChuSp ghiChuSp = await GetGhiChuSanPham(maGhiChu);

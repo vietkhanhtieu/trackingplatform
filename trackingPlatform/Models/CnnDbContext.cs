@@ -65,14 +65,14 @@ public partial class CnnDbContext : DbContext
 
     public virtual DbSet<UserRole> UserRoles { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        IConfigurationRoot configuration = new ConfigurationBuilder()
-            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-            .AddJsonFile("appsettings.json")
-            .Build();
-        optionsBuilder.LogTo(Console.WriteLine).EnableSensitiveDataLogging().UseNpgsql(configuration.GetConnectionString("CNN_DB"));
-    }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseNpgsql("Host=localhost;Database=product;Username=postgres;Password=0866449437khanh");
+    //{
+    //    IConfigurationRoot configuration = new ConfigurationBuilder()
+    //        .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+    //        .AddJsonFile("appsettings.json")
+    //        .Build();
+    //    optionsBuilder.LogTo(Console.WriteLine).EnableSensitiveDataLogging().UseNpgsql(configuration.GetConnectionString("CNN_DB"));
+    //}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

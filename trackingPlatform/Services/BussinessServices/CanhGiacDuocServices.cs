@@ -40,6 +40,11 @@ namespace trackingPlatform.Service.BussinessServices
             await _canhGiacDuocRepositoryServices.AddAsync(canhGiacDuoc);
         }
 
+        public async Task UpdateAsync(CanhGiacDuoc canhGiacDuoc)
+        {
+            await _canhGiacDuocRepositoryServices.UpdateAsync(canhGiacDuoc);
+        }
+
         public async Task<CanhGiacDuoc> DeleteAsync(string maCanhGiacDuoc)
         {
             CanhGiacDuoc canhGiacDuoc = await GetCanhGiacDuoc(maCanhGiacDuoc);

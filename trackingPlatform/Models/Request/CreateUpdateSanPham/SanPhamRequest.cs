@@ -92,6 +92,7 @@ namespace trackingPlatform.Models.Request.CreateUpdateSanPham
         public string? MaLoaiSpNoiBo { get; set; }
 
         [BindNever]
+        [JsonIgnore]
         public string? MaLoaiSp { get; set; }
 
         [BindNever]
@@ -127,7 +128,6 @@ namespace trackingPlatform.Models.Request.CreateUpdateSanPham
         public virtual SanPhamGop? SanPhamGop { get; set; }
 
         [BindNever]
-        [JsonIgnore]
         public virtual LoaiSp? LoaiSp { get; set; }
 
         [BindNever]

@@ -33,6 +33,11 @@ namespace trackingPlatform.Service.BussinessServices
             await _thongTinPhapLyRepositoryServices.AddAsync(thongTinPhapLy);
         }
 
+        public async Task UpdateAsync(ThongTinPhapLy thongTinPhapLy)
+        {
+            await _thongTinPhapLyRepositoryServices.UpdateAsync(thongTinPhapLy);
+        }
+
         public async Task<ThongTinPhapLy> DeleteAsync(string maTTPL)
         {
             ThongTinPhapLy thongTinPhapLy = await GetThongTinPhapLy(maTTPL);
