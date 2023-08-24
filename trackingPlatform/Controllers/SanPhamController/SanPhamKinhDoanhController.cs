@@ -94,17 +94,17 @@ namespace trackingPlatform.Controllers.SanPhamController
         /// Create or Update Sản phẩm kinh doanh EcDb
         /// </summary>
 
-        [HttpPost("sync-ec")]
-        public async Task<IActionResult> PostEc([FromBody] List<SanPhamRequest> sanPhamRequests)
-        {
-            try
-            {
-                return Ok(await _sanPhamKinhDoanhServices.AddOrUpdateSanPhamsSyncEc(sanPhamRequests));
-            }
-            catch
-            {
-                return Problem();
-            }
-        }
+        //[HttpPost("sync-ec")]
+        //public async Task<IActionResult> PostEc([FromBody] List<SanPhamRequest> sanPhamRequests)
+        //{
+        //    try
+        //    {
+        //        return Ok(await _sanPhamKinhDoanhServices.AddOrUpdateSanPhamsSyncEc(sanPhamRequests));
+        //    }
+        //    catch
+        //    {
+        //        return Problem();
+        //    }
+        //}
     }
 }
