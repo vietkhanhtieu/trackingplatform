@@ -26,8 +26,6 @@ namespace trackingPlatform.Utils
             oldSpkd.QrCode = newSpkd.QrCode;
             oldSpkd.HinhAnh = newSpkd.HinhAnh;
             oldSpkd.TrangThai = newSpkd.TrangThai;
-            //oldSpkd.GhiChuSps = newSpkd.GhiChuSps;
-            //oldSpkd.CanhGiacDuocs = newSpkd.CanhGiacDuocs;
             oldSpkd.MaDangBaoCheNavigation = newSpkd.MaDangBaoCheNavigation;
             oldSpkd.MaDinhHuongNavigation = newSpkd.MaDinhHuongNavigation;
             oldSpkd.MaDkbqNavigation = newSpkd.MaDkbqNavigation;
@@ -37,10 +35,6 @@ namespace trackingPlatform.Utils
             oldSpkd.MaLoaiSpNoiBoNavigation = newSpkd.MaLoaiSpNoiBoNavigation;
             oldSpkd.MaNhomKiemSoatNavigation = newSpkd.MaNhomKiemSoatNavigation;
             oldSpkd.MaNhomKinhDoanhNavigation = newSpkd.MaNhomKinhDoanhNavigation;
-            //oldSpkd.ThongTinChinhs = newSpkd.ThongTinChinhs;
-            //oldSpkd.ThongTinNguonGocs = newSpkd.ThongTinNguonGocs;
-            //oldSpkd.ThongTinNoiBos = newSpkd.ThongTinNoiBos;
-            //oldSpkd.ThongTinPhapLies = newSpkd.ThongTinPhapLies;
             return oldSpkd;
         }
     }
