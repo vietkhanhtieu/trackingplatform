@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using trackingPlatform.Models.KhachHangModels;
+using trackingPlatform.Models.SanPhamModels;
 
 namespace trackingPlatform.Models;
 
@@ -21,6 +23,18 @@ public partial class CnnDbContext : DbContext
 
     public virtual DbSet<CanhGiacDuoc> CanhGiacDuocs { get; set; }
 
+    public virtual DbSet<CbnvGonsa> CbnvGonsas { get; set; }
+
+    public virtual DbSet<CbnvKhachHang> CbnvKhachHangs { get; set; }
+
+    public virtual DbSet<CbnvgonsaKhb2b> CbnvgonsaKhb2bs { get; set; }
+
+    public virtual DbSet<ChiNhanh> ChiNhanhs { get; set; }
+
+    public virtual DbSet<ChuyenKhoa> ChuyenKhoas { get; set; }
+
+    public virtual DbSet<CongNo> CongNos { get; set; }
+
     public virtual DbSet<DangBaoChe> DangBaoChes { get; set; }
 
     public virtual DbSet<DanhMucLoaiSp> DanhMucLoaiSps { get; set; }
@@ -33,17 +47,49 @@ public partial class CnnDbContext : DbContext
 
     public virtual DbSet<GhiChuSp> GhiChuSps { get; set; }
 
+    public virtual DbSet<KhNgayCotMoc> KhNgayCotMocs { get; set; }
+
+    public virtual DbSet<KhachHang> KhachHangs { get; set; }
+
+    public virtual DbSet<KhachHangB2b> KhachHangB2bs { get; set; }
+
+    public virtual DbSet<KhachHangB2c> KhachHangB2cs { get; set; }
+
+    public virtual DbSet<Khb2bCkhoa> Khb2bCkhoas { get; set; }
+
+    public virtual DbSet<Khb2bLhdvu> Khb2bLhdvus { get; set; }
+
+    public virtual DbSet<LoaiHinhDichVu> LoaiHinhDichVus { get; set; }
+
     public virtual DbSet<LoaiSp> LoaiSps { get; set; }
 
     public virtual DbSet<LoaiSpNoiBo> LoaiSpNoiBos { get; set; }
 
+    public virtual DbSet<LoaiTheThanhVien> LoaiTheThanhViens { get; set; }
+
     public virtual DbSet<MwForm> MwForms { get; set; }
+
+    public virtual DbSet<NgayCotMoc> NgayCotMocs { get; set; }
+
+    public virtual DbSet<NguoiDaiDienPhapLy> NguoiDaiDienPhapLies { get; set; }
+
+    public virtual DbSet<NguoiNhanTtHdon> NguoiNhanTtHdons { get; set; }
 
     public virtual DbSet<NhomApi> NhomApis { get; set; }
 
+    public virtual DbSet<NhomKhachHangB2b> NhomKhachHangB2bs { get; set; }
+
     public virtual DbSet<NhomKiemSoat> NhomKiemSoats { get; set; }
 
+    public virtual DbSet<NhomKiemSoatDacBiet> NhomKiemSoatDacBiets { get; set; }
+
     public virtual DbSet<NhomKinhDoanh> NhomKinhDoanhs { get; set; }
+
+    public virtual DbSet<PhanHang> PhanHangs { get; set; }
+
+    public virtual DbSet<PhanNganh> PhanNganhs { get; set; }
+
+    public virtual DbSet<PhuongThucLienLac> PhuongThucLienLacs { get; set; }
 
     public virtual DbSet<RoleApiUser> RoleApiUsers { get; set; }
 
@@ -53,11 +99,19 @@ public partial class CnnDbContext : DbContext
 
     public virtual DbSet<ThongTinChinh> ThongTinChinhs { get; set; }
 
+    public virtual DbSet<ThongTinGdp> ThongTinGdps { get; set; }
+
+    public virtual DbSet<ThongTinGpp> ThongTinGpps { get; set; }
+
     public virtual DbSet<ThongTinNguonGoc> ThongTinNguonGocs { get; set; }
 
     public virtual DbSet<ThongTinNoiBo> ThongTinNoiBos { get; set; }
 
     public virtual DbSet<ThongTinPhapLy> ThongTinPhapLies { get; set; }
+
+    public virtual DbSet<ThongTinThue> ThongTinThues { get; set; }
+
+    public virtual DbSet<ThongTinXuatHoaDon> ThongTinXuatHoaDons { get; set; }
 
     public virtual DbSet<UserMiddleware> UserMiddlewares { get; set; }
 
@@ -65,14 +119,9 @@ public partial class CnnDbContext : DbContext
 
     public virtual DbSet<UserRole> UserRoles { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseNpgsql("Host=localhost;Database=product;Username=postgres;Password=0866449437khanh");
-    //{
-    //    IConfigurationRoot configuration = new ConfigurationBuilder()
-    //        .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-    //        .AddJsonFile("appsettings.json")
-    //        .Build();
-    //    optionsBuilder.LogTo(Console.WriteLine).EnableSensitiveDataLogging().UseNpgsql(configuration.GetConnectionString("CNN_DB"));
-    //}
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseNpgsql("Host=localhost;Database=product;Username=postgres;Password=0866449437khanh");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -143,6 +192,176 @@ public partial class CnnDbContext : DbContext
             entity.HasOne(d => d.MaSanPhamNavigation).WithMany(p => p.CanhGiacDuocs)
                 .HasForeignKey(d => d.MaSanPham)
                 .HasConstraintName("fk_masp_cgd_spkd");
+        });
+
+        modelBuilder.Entity<CbnvGonsa>(entity =>
+        {
+            entity.HasKey(e => e.MaNhanVien).HasName("pk_cbnv_gonsa");
+
+            entity.ToTable("cbnv_gonsa", "customer");
+
+            entity.Property(e => e.MaNhanVien)
+                .HasMaxLength(10)
+                .HasColumnName("ma_nhan_vien");
+            entity.Property(e => e.ChucVu)
+                .HasMaxLength(500)
+                .HasColumnName("chuc_vu");
+            entity.Property(e => e.Email)
+                .HasMaxLength(200)
+                .HasColumnName("email");
+            entity.Property(e => e.PhongBan)
+                .HasMaxLength(500)
+                .HasColumnName("phong_ban");
+            entity.Property(e => e.SoDt)
+                .HasMaxLength(20)
+                .HasColumnName("so_dt");
+            entity.Property(e => e.TenNhanVien)
+                .HasMaxLength(200)
+                .HasColumnName("ten_nhan_vien");
+        });
+
+        modelBuilder.Entity<CbnvKhachHang>(entity =>
+        {
+            entity.HasKey(e => new { e.MaKhachHangB2b, e.MaCbnvKh }).HasName("pk_cbnv_kh");
+
+            entity.ToTable("cbnv_khach_hang", "customer");
+
+            entity.Property(e => e.MaKhachHangB2b)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2b");
+            entity.Property(e => e.MaCbnvKh)
+                .HasMaxLength(20)
+                .HasColumnName("ma_cbnv_kh");
+            entity.Property(e => e.ChucVu)
+                .HasMaxLength(200)
+                .HasColumnName("chuc_vu");
+            entity.Property(e => e.Email)
+                .HasMaxLength(200)
+                .HasColumnName("email");
+            entity.Property(e => e.GhiChu)
+                .HasMaxLength(2000)
+                .HasColumnName("ghi_chu");
+            entity.Property(e => e.GioiTinh).HasColumnName("gioi_tinh");
+            entity.Property(e => e.HinhAnh)
+                .HasMaxLength(500)
+                .HasColumnName("hinh_anh");
+            entity.Property(e => e.NgaySinh).HasColumnName("ngay_sinh");
+            entity.Property(e => e.PhongBan)
+                .HasMaxLength(500)
+                .HasColumnName("phong_ban");
+            entity.Property(e => e.SoDt)
+                .HasMaxLength(20)
+                .HasColumnName("so_dt");
+            entity.Property(e => e.TenCbnv)
+                .HasMaxLength(200)
+                .HasColumnName("ten_cbnv");
+
+            entity.HasOne(d => d.MaKhachHangB2bNavigation).WithMany(p => p.CbnvKhachHangs)
+                .HasForeignKey(d => d.MaKhachHangB2b)
+                .HasConstraintName("fk_makhb2b_cbnvkh_khb2b");
+        });
+
+        modelBuilder.Entity<CbnvgonsaKhb2b>(entity =>
+        {
+            entity.HasKey(e => new { e.MaNhanVien, e.MaKhachHangB2b }).HasName("pk_cbnvgs_khb2b");
+
+            entity.ToTable("cbnvgonsa_khb2b", "customer");
+
+            entity.Property(e => e.MaNhanVien)
+                .HasMaxLength(10)
+                .HasColumnName("ma_nhan_vien");
+            entity.Property(e => e.MaKhachHangB2b)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2b");
+            entity.Property(e => e.NgayLienHe).HasColumnName("ngay_lien_he");
+
+            entity.HasOne(d => d.MaKhachHangB2bNavigation).WithMany(p => p.CbnvgonsaKhb2bs)
+                .HasForeignKey(d => d.MaKhachHangB2b)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_makhb2b_cbnvb2b_khb2b");
+
+            entity.HasOne(d => d.MaNhanVienNavigation).WithMany(p => p.CbnvgonsaKhb2bs)
+                .HasForeignKey(d => d.MaNhanVien)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_manv_cbnvkhb2b_khb2b");
+        });
+
+        modelBuilder.Entity<ChiNhanh>(entity =>
+        {
+            entity.HasKey(e => e.MaChiNhanh).HasName("pk_chi_nhanh");
+
+            entity.ToTable("chi_nhanh", "customer");
+
+            entity.Property(e => e.MaChiNhanh)
+                .HasMaxLength(20)
+                .HasColumnName("ma_chi_nhanh");
+            entity.Property(e => e.ChiNhanhMe).HasColumnName("chi_nhanh_me");
+            entity.Property(e => e.DiaChi)
+                .HasMaxLength(2000)
+                .HasColumnName("dia_chi");
+            entity.Property(e => e.Email)
+                .HasMaxLength(200)
+                .HasColumnName("email");
+            entity.Property(e => e.MaKhachHangB2b)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2b");
+            entity.Property(e => e.MoiQuanHe)
+                .HasMaxLength(500)
+                .HasColumnName("moi_quan_he");
+            entity.Property(e => e.SoDt)
+                .HasMaxLength(20)
+                .HasColumnName("so_dt");
+            entity.Property(e => e.TenChiNhanh)
+                .HasMaxLength(2000)
+                .HasColumnName("ten_chi_nhanh");
+
+            entity.HasOne(d => d.MaKhachHangB2bNavigation).WithMany(p => p.ChiNhanhs)
+                .HasForeignKey(d => d.MaKhachHangB2b)
+                .HasConstraintName("fk_makhb2b_cnh_khb2b");
+        });
+
+        modelBuilder.Entity<ChuyenKhoa>(entity =>
+        {
+            entity.HasKey(e => e.MaChuyenKhoa).HasName("pk_chuyen_khoa");
+
+            entity.ToTable("chuyen_khoa", "customer");
+
+            entity.Property(e => e.MaChuyenKhoa)
+                .HasMaxLength(10)
+                .HasColumnName("ma_chuyen_khoa");
+            entity.Property(e => e.MoTa)
+                .HasMaxLength(2000)
+                .HasColumnName("mo_ta");
+            entity.Property(e => e.TenChuyenKhoa)
+                .HasMaxLength(1000)
+                .HasColumnName("ten_chuyen_khoa");
+        });
+
+        modelBuilder.Entity<CongNo>(entity =>
+        {
+            entity.HasKey(e => new { e.MaKhachHangB2b, e.MaCongNo }).HasName("pk_cong_no");
+
+            entity.ToTable("cong_no", "customer");
+
+            entity.Property(e => e.MaKhachHangB2b)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2b");
+            entity.Property(e => e.MaCongNo)
+                .HasMaxLength(10)
+                .HasColumnName("ma_cong_no");
+            entity.Property(e => e.DanhGia)
+                .HasMaxLength(2000)
+                .HasColumnName("danh_gia");
+            entity.Property(e => e.GhiChu)
+                .HasMaxLength(2000)
+                .HasColumnName("ghi_chu");
+            entity.Property(e => e.HanMucCongNo).HasColumnName("han_muc_cong_no");
+            entity.Property(e => e.ThoiHanCongNo).HasColumnName("thoi_han_cong_no");
+
+            entity.HasOne(d => d.MaKhachHangB2bNavigation).WithMany(p => p.CongNos)
+                .HasForeignKey(d => d.MaKhachHangB2b)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_makhb2b_cno_khb2b");
         });
 
         modelBuilder.Entity<DangBaoChe>(entity =>
@@ -255,6 +474,254 @@ public partial class CnnDbContext : DbContext
                 .HasConstraintName("fk_masp_gchusp_spkd");
         });
 
+        modelBuilder.Entity<KhNgayCotMoc>(entity =>
+        {
+            entity.HasKey(e => new { e.MaCotMoc, e.MaKhachHangB2b }).HasName("pk_kh_ncmoc");
+
+            entity.ToTable("kh_ngay_cot_moc", "customer");
+
+            entity.Property(e => e.MaCotMoc)
+                .HasMaxLength(10)
+                .HasColumnName("ma_cot_moc");
+            entity.Property(e => e.MaKhachHangB2b)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2b");
+            entity.Property(e => e.NgayDatMoc).HasColumnName("ngay_dat_moc");
+            entity.Property(e => e.TenCotMoc)
+                .HasMaxLength(2000)
+                .HasColumnName("ten_cot_moc");
+
+            entity.HasOne(d => d.MaCotMocNavigation).WithMany(p => p.KhNgayCotMocs)
+                .HasForeignKey(d => d.MaCotMoc)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_macmoc_khncmoc_cmoc");
+
+            entity.HasOne(d => d.MaKhachHangB2bNavigation).WithMany(p => p.KhNgayCotMocs)
+                .HasForeignKey(d => d.MaKhachHangB2b)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_makhb2b_khncmoc_khb2b");
+        });
+
+        modelBuilder.Entity<KhachHang>(entity =>
+        {
+            entity.HasKey(e => e.MaKhachHang).HasName("pk_khach_hang");
+
+            entity.ToTable("khach_hang", "customer");
+
+            entity.Property(e => e.MaKhachHang)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang");
+            entity.Property(e => e.CodeMonet)
+                .HasMaxLength(50)
+                .HasColumnName("code_monet");
+            entity.Property(e => e.DiaChi)
+                .HasMaxLength(2000)
+                .HasColumnName("dia_chi");
+            entity.Property(e => e.DoUuTien)
+                .HasMaxLength(100)
+                .HasColumnName("do_uu_tien");
+            entity.Property(e => e.DuocDuyet).HasColumnName("duoc_duyet");
+            entity.Property(e => e.Email)
+                .HasMaxLength(200)
+                .HasColumnName("email");
+            entity.Property(e => e.GhiChu)
+                .HasMaxLength(2000)
+                .HasColumnName("ghi_chu");
+            entity.Property(e => e.MaKhachHangB2b)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2b");
+            entity.Property(e => e.MaKhachHangB2c)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2c");
+            entity.Property(e => e.MaKhachHangGonsa)
+                .HasMaxLength(20)
+                .HasColumnName("ma_khach_hang_gonsa");
+            entity.Property(e => e.MaKhoQuaTang)
+                .HasMaxLength(10)
+                .HasColumnName("ma_kho_qua_tang");
+            entity.Property(e => e.MaLoaiThe)
+                .HasMaxLength(10)
+                .HasColumnName("ma_loai_the");
+            entity.Property(e => e.MaPhuongThuc)
+                .HasMaxLength(10)
+                .HasColumnName("ma_phuong_thuc");
+            entity.Property(e => e.MaTtXuatHd)
+                .HasMaxLength(10)
+                .HasColumnName("ma_tt_xuat_hd");
+            entity.Property(e => e.SoDt)
+                .HasMaxLength(50)
+                .HasColumnName("so_dt");
+            entity.Property(e => e.TenChuNhaThuoc)
+                .HasMaxLength(2000)
+                .HasColumnName("ten_chu_nha_thuoc");
+            entity.Property(e => e.TenKhachHang)
+                .HasMaxLength(2000)
+                .HasColumnName("ten_khach_hang");
+            entity.Property(e => e.TrangThaiHoatDong).HasColumnName("trang_thai_hoat_dong");
+
+            entity.HasOne(d => d.MaKhachHangB2bNavigation).WithMany(p => p.KhachHangs)
+                .HasForeignKey(d => d.MaKhachHangB2b)
+                .HasConstraintName("fk_makhb2b_kh_khb2b");
+
+            entity.HasOne(d => d.MaKhachHangB2cNavigation).WithMany(p => p.KhachHangs)
+                .HasForeignKey(d => d.MaKhachHangB2c)
+                .HasConstraintName("fk_makhb2c_kh_khb2c");
+
+            entity.HasOne(d => d.MaLoaiTheNavigation).WithMany(p => p.KhachHangs)
+                .HasForeignKey(d => d.MaLoaiThe)
+                .HasConstraintName("fk_malthe_kh_lttv");
+
+            entity.HasOne(d => d.MaPhuongThucNavigation).WithMany(p => p.KhachHangs)
+                .HasForeignKey(d => d.MaPhuongThuc)
+                .HasConstraintName("fk_mapt_kh_ptll");
+
+            entity.HasOne(d => d.MaTtXuatHdNavigation).WithMany(p => p.KhachHangs)
+                .HasForeignKey(d => d.MaTtXuatHd)
+                .HasConstraintName("fk_mattxhd_kh_ttxhdon");
+        });
+
+        modelBuilder.Entity<KhachHangB2b>(entity =>
+        {
+            entity.HasKey(e => e.MaKhachHangB2b).HasName("pk_khach_hang_b2b");
+
+            entity.ToTable("khach_hang_b2b", "customer");
+
+            entity.Property(e => e.MaKhachHangB2b)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2b");
+            entity.Property(e => e.BaoHiemThanhToan).HasColumnName("bao_hiem_thanh_toan");
+            entity.Property(e => e.GiayPhepKinhDoanh)
+                .HasMaxLength(500)
+                .HasColumnName("giay_phep_kinh_doanh");
+            entity.Property(e => e.LaCsh).HasColumnName("la_csh");
+            entity.Property(e => e.LaKhdv).HasColumnName("la_khdv");
+            entity.Property(e => e.LaNcc).HasColumnName("la_ncc");
+            entity.Property(e => e.LaPartner).HasColumnName("la_partner");
+            entity.Property(e => e.MaKhachHangGonsa)
+                .HasMaxLength(20)
+                .HasColumnName("ma_khach_hang_gonsa");
+            entity.Property(e => e.MaNguoiDaiDien)
+                .HasMaxLength(20)
+                .HasColumnName("ma_nguoi_dai_dien");
+            entity.Property(e => e.MaNhom)
+                .HasMaxLength(10)
+                .HasColumnName("ma_nhom");
+            entity.Property(e => e.MaPhanHang)
+                .HasMaxLength(10)
+                .HasColumnName("ma_phan_hang");
+            entity.Property(e => e.MaPhanNganh)
+                .HasMaxLength(10)
+                .HasColumnName("ma_phan_nganh");
+            entity.Property(e => e.NgayThanhLap).HasColumnName("ngay_thanh_lap");
+
+            entity.HasOne(d => d.MaNguoiDaiDienNavigation).WithMany(p => p.KhachHangB2bs)
+                .HasForeignKey(d => d.MaNguoiDaiDien)
+                .HasConstraintName("fk_mandd_khb2b_nddpl");
+
+            entity.HasOne(d => d.MaNhomNavigation).WithMany(p => p.KhachHangB2bs)
+                .HasForeignKey(d => d.MaNhom)
+                .HasConstraintName("fk_manhom_khb2b_nkhb2b");
+
+            entity.HasOne(d => d.MaPhanHangNavigation).WithMany(p => p.KhachHangB2bs)
+                .HasForeignKey(d => d.MaPhanHang)
+                .HasConstraintName("fk_maphang_khb2b_phang");
+
+            entity.HasOne(d => d.MaPhanNganhNavigation).WithMany(p => p.KhachHangB2bs)
+                .HasForeignKey(d => d.MaPhanNganh)
+                .HasConstraintName("fk_mapn_khb2b_pnghanh");
+        });
+
+        modelBuilder.Entity<KhachHangB2c>(entity =>
+        {
+            entity.HasKey(e => e.MaKhachHangB2c).HasName("pk_khach_hang_b2c");
+
+            entity.ToTable("khach_hang_b2c", "customer");
+
+            entity.Property(e => e.MaKhachHangB2c)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2c");
+            entity.Property(e => e.MoTa)
+                .HasMaxLength(2000)
+                .HasColumnName("mo_ta");
+        });
+
+        modelBuilder.Entity<Khb2bCkhoa>(entity =>
+        {
+            entity.HasKey(e => new { e.MaKhachHangB2b, e.MaChuyenKhoa }).HasName("pk_khb2b_ckhoa");
+
+            entity.ToTable("khb2b_ckhoa", "customer");
+
+            entity.Property(e => e.MaKhachHangB2b)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2b");
+            entity.Property(e => e.MaChuyenKhoa)
+                .HasMaxLength(10)
+                .HasColumnName("ma_chuyen_khoa");
+            entity.Property(e => e.GhiChu)
+                .HasMaxLength(2000)
+                .HasColumnName("ghi_chu");
+
+            entity.HasOne(d => d.MaChuyenKhoaNavigation).WithMany(p => p.Khb2bCkhoas)
+                .HasForeignKey(d => d.MaChuyenKhoa)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_mackhoa_khb2bckhoa_ckhoa");
+
+            entity.HasOne(d => d.MaKhachHangB2bNavigation).WithMany(p => p.Khb2bCkhoas)
+                .HasForeignKey(d => d.MaKhachHangB2b)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_makhb2b_khb2bckhoa_khb2b");
+        });
+
+        modelBuilder.Entity<Khb2bLhdvu>(entity =>
+        {
+            entity.HasKey(e => new { e.MaKhachHangB2b, e.MaLoaiHinhDv }).HasName("pk_khb2b_lhdvu");
+
+            entity.ToTable("khb2b_lhdvu", "customer");
+
+            entity.Property(e => e.MaKhachHangB2b)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2b");
+            entity.Property(e => e.MaLoaiHinhDv)
+                .HasMaxLength(10)
+                .HasColumnName("ma_loai_hinh_dv");
+            entity.Property(e => e.GhiChu)
+                .HasMaxLength(2000)
+                .HasColumnName("ghi_chu");
+
+            entity.HasOne(d => d.MaKhachHangB2bNavigation).WithMany(p => p.Khb2bLhdvus)
+                .HasForeignKey(d => d.MaKhachHangB2b)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_makhb2b_khb2blhdvu_lhdvu");
+
+            entity.HasOne(d => d.MaLoaiHinhDvNavigation).WithMany(p => p.Khb2bLhdvus)
+                .HasForeignKey(d => d.MaLoaiHinhDv)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_malhdv_khb2b_lhdvu_lhdvu");
+        });
+
+        modelBuilder.Entity<LoaiHinhDichVu>(entity =>
+        {
+            entity.HasKey(e => e.MaLoaiHinhDv).HasName("pk_loai_hinh_dv");
+
+            entity.ToTable("loai_hinh_dich_vu", "customer");
+
+            entity.Property(e => e.MaLoaiHinhDv)
+                .HasMaxLength(10)
+                .HasColumnName("ma_loai_hinh_dv");
+            entity.Property(e => e.KyHieuVietTat)
+                .HasMaxLength(10)
+                .HasColumnName("ky_hieu_viet_tat");
+            entity.Property(e => e.LoaiHinhDv)
+                .HasMaxLength(1000)
+                .HasColumnName("loai_hinh_dv");
+            entity.Property(e => e.MoTa)
+                .HasMaxLength(2000)
+                .HasColumnName("mo_ta");
+            entity.Property(e => e.PhiDichVu)
+                .HasMaxLength(2000)
+                .HasColumnName("phi_dich_vu");
+        });
+
         modelBuilder.Entity<LoaiSp>(entity =>
         {
             entity.HasKey(e => e.MaLoaiSp).HasName("pk_loai_sp");
@@ -300,6 +767,23 @@ public partial class CnnDbContext : DbContext
                 .HasColumnName("ten_loai_sp_noi_bo");
         });
 
+        modelBuilder.Entity<LoaiTheThanhVien>(entity =>
+        {
+            entity.HasKey(e => e.MaLoaiThe).HasName("pk_loai_the");
+
+            entity.ToTable("loai_the_thanh_vien", "customer");
+
+            entity.Property(e => e.MaLoaiThe)
+                .HasMaxLength(10)
+                .HasColumnName("ma_loai_the");
+            entity.Property(e => e.KyHieuVietTat)
+                .HasMaxLength(10)
+                .HasColumnName("ky_hieu_viet_tat");
+            entity.Property(e => e.TenLoaiThe)
+                .HasMaxLength(500)
+                .HasColumnName("ten_loai_the");
+        });
+
         modelBuilder.Entity<MwForm>(entity =>
         {
             entity.HasKey(e => e.MaForm).HasName("pk_mw_form");
@@ -317,6 +801,70 @@ public partial class CnnDbContext : DbContext
                 .HasColumnName("ten_form");
         });
 
+        modelBuilder.Entity<NgayCotMoc>(entity =>
+        {
+            entity.HasKey(e => e.MaCotMoc).HasName("pk_ngay_cot_moc");
+
+            entity.ToTable("ngay_cot_moc", "customer");
+
+            entity.Property(e => e.MaCotMoc)
+                .HasMaxLength(10)
+                .HasColumnName("ma_cot_moc");
+            entity.Property(e => e.MoTa)
+                .HasMaxLength(2000)
+                .HasColumnName("mo_ta");
+            entity.Property(e => e.NoiDung)
+                .HasMaxLength(2000)
+                .HasColumnName("noi_dung");
+        });
+
+        modelBuilder.Entity<NguoiDaiDienPhapLy>(entity =>
+        {
+            entity.HasKey(e => e.MaNguoiDaiDien).HasName("pk_nguoi_dai_dien");
+
+            entity.ToTable("nguoi_dai_dien_phap_ly", "customer");
+
+            entity.Property(e => e.MaNguoiDaiDien)
+                .HasMaxLength(20)
+                .HasColumnName("ma_nguoi_dai_dien");
+            entity.Property(e => e.Email)
+                .HasMaxLength(200)
+                .HasColumnName("email");
+            entity.Property(e => e.SoDt)
+                .HasMaxLength(20)
+                .HasColumnName("so_dt");
+            entity.Property(e => e.TenNguoiDaiDien)
+                .HasMaxLength(500)
+                .HasColumnName("ten_nguoi_dai_dien");
+        });
+
+        modelBuilder.Entity<NguoiNhanTtHdon>(entity =>
+        {
+            entity.HasKey(e => e.MaNguoiNhan).HasName("pk_nguoi_nhan");
+
+            entity.ToTable("nguoi_nhan_tt_hdon", "customer");
+
+            entity.Property(e => e.MaNguoiNhan)
+                .HasMaxLength(10)
+                .HasColumnName("ma_nguoi_nhan");
+            entity.Property(e => e.Email)
+                .HasMaxLength(200)
+                .HasColumnName("email");
+            entity.Property(e => e.MaKhachHangB2b)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2b");
+            entity.Property(e => e.SoDt)
+                .HasMaxLength(20)
+                .HasColumnName("so_dt");
+            entity.Property(e => e.TenNguoiNhan)
+                .HasMaxLength(200)
+                .HasColumnName("ten_nguoi_nhan");
+
+            entity.HasOne(d => d.MaKhachHangB2bNavigation).WithMany(p => p.NguoiNhanTtHdons)
+                .HasForeignKey(d => d.MaKhachHangB2b)
+                .HasConstraintName("fk_makhb2b_nntthd_khb2b");
+        });
+
         modelBuilder.Entity<NhomApi>(entity =>
         {
             entity.HasKey(e => e.MaNhomApi).HasName("pk_nhom_api");
@@ -332,6 +880,26 @@ public partial class CnnDbContext : DbContext
             entity.Property(e => e.TenNhomApi)
                 .HasMaxLength(500)
                 .HasColumnName("ten_nhom_api");
+        });
+
+        modelBuilder.Entity<NhomKhachHangB2b>(entity =>
+        {
+            entity.HasKey(e => e.MaNhom).HasName("pk_nhom_khach_hang_b2b");
+
+            entity.ToTable("nhom_khach_hang_b2b", "customer");
+
+            entity.Property(e => e.MaNhom)
+                .HasMaxLength(10)
+                .HasColumnName("ma_nhom");
+            entity.Property(e => e.KyHieuVietTat)
+                .HasMaxLength(10)
+                .HasColumnName("ky_hieu_viet_tat");
+            entity.Property(e => e.MoTa)
+                .HasMaxLength(2000)
+                .HasColumnName("mo_ta");
+            entity.Property(e => e.TenNhom)
+                .HasMaxLength(500)
+                .HasColumnName("ten_nhom");
         });
 
         modelBuilder.Entity<NhomKiemSoat>(entity =>
@@ -352,6 +920,36 @@ public partial class CnnDbContext : DbContext
             entity.Property(e => e.YNghia)
                 .HasMaxLength(2000)
                 .HasColumnName("y_nghia");
+        });
+
+        modelBuilder.Entity<NhomKiemSoatDacBiet>(entity =>
+        {
+            entity.HasKey(e => new { e.MaKhachHangB2b, e.MaNksdb }).HasName("pk_nksdb");
+
+            entity.ToTable("nhom_kiem_soat_dac_biet", "customer");
+
+            entity.Property(e => e.MaKhachHangB2b)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2b");
+            entity.Property(e => e.MaNksdb)
+                .HasMaxLength(10)
+                .HasColumnName("ma_nksdb");
+            entity.Property(e => e.CamTrongMotSoLinhVuc).HasColumnName("cam_trong_mot_so_linh_vuc");
+            entity.Property(e => e.DangPhChuaDcGayNghien).HasColumnName("dang_ph_chua_dc_gay_nghien");
+            entity.Property(e => e.DangPhChuaDchatHuongThan).HasColumnName("dang_ph_chua_dchat_huong_than");
+            entity.Property(e => e.DangPhChuaTienChat).HasColumnName("dang_ph_chua_tien_chat");
+            entity.Property(e => e.NguyenLieuLaDcGayNghienHuongThanPxaTchat).HasColumnName("nguyen_lieu_la_dc_gay_nghien_huong_than_pxa_tchat");
+            entity.Property(e => e.ThuocDocNlieuDocLamThuoc).HasColumnName("thuoc_doc_nlieu_doc_lam_thuoc");
+            entity.Property(e => e.ThuocGayNghien).HasColumnName("thuoc_gay_nghien");
+            entity.Property(e => e.ThuocHanCheBanLe).HasColumnName("thuoc_han_che_ban_le");
+            entity.Property(e => e.ThuocHuongThan).HasColumnName("thuoc_huong_than");
+            entity.Property(e => e.ThuocPhongXa).HasColumnName("thuoc_phong_xa");
+            entity.Property(e => e.ThuocTienChat).HasColumnName("thuoc_tien_chat");
+
+            entity.HasOne(d => d.MaKhachHangB2bNavigation).WithMany(p => p.NhomKiemSoatDacBiets)
+                .HasForeignKey(d => d.MaKhachHangB2b)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_makhb2b_nksdb_khb2b");
         });
 
         modelBuilder.Entity<NhomKinhDoanh>(entity =>
@@ -375,6 +973,57 @@ public partial class CnnDbContext : DbContext
             entity.Property(e => e.YNghia)
                 .HasMaxLength(2000)
                 .HasColumnName("y_nghia");
+        });
+
+        modelBuilder.Entity<PhanHang>(entity =>
+        {
+            entity.HasKey(e => e.MaPhanHang).HasName("pk_phan_hang");
+
+            entity.ToTable("phan_hang", "customer");
+
+            entity.Property(e => e.MaPhanHang)
+                .HasMaxLength(10)
+                .HasColumnName("ma_phan_hang");
+            entity.Property(e => e.Hang)
+                .HasMaxLength(100)
+                .HasColumnName("hang");
+            entity.Property(e => e.MoTa)
+                .HasMaxLength(2000)
+                .HasColumnName("mo_ta");
+        });
+
+        modelBuilder.Entity<PhanNganh>(entity =>
+        {
+            entity.HasKey(e => e.MaPhanNganh).HasName("pk_phan_nganh");
+
+            entity.ToTable("phan_nganh", "customer");
+
+            entity.Property(e => e.MaPhanNganh)
+                .HasMaxLength(10)
+                .HasColumnName("ma_phan_nganh");
+            entity.Property(e => e.MoTa)
+                .HasMaxLength(2000)
+                .HasColumnName("mo_ta");
+            entity.Property(e => e.PhanNganh1)
+                .HasMaxLength(500)
+                .HasColumnName("phan_nganh");
+        });
+
+        modelBuilder.Entity<PhuongThucLienLac>(entity =>
+        {
+            entity.HasKey(e => e.MaPhuongThuc).HasName("pk_phuong_thuc");
+
+            entity.ToTable("phuong_thuc_lien_lac", "customer");
+
+            entity.Property(e => e.MaPhuongThuc)
+                .HasMaxLength(10)
+                .HasColumnName("ma_phuong_thuc");
+            entity.Property(e => e.MoTa)
+                .HasMaxLength(2000)
+                .HasColumnName("mo_ta");
+            entity.Property(e => e.PhuongThuc)
+                .HasMaxLength(500)
+                .HasColumnName("phuong_thuc");
         });
 
         modelBuilder.Entity<RoleApiUser>(entity =>
@@ -575,6 +1224,66 @@ public partial class CnnDbContext : DbContext
                 .HasConstraintName("fk_masp_ttc_spkd");
         });
 
+        modelBuilder.Entity<ThongTinGdp>(entity =>
+        {
+            entity.HasKey(e => e.MaTtGdp).HasName("pk_thong_tin_gdp");
+
+            entity.ToTable("thong_tin_gdp", "customer");
+
+            entity.Property(e => e.MaTtGdp)
+                .HasMaxLength(20)
+                .HasColumnName("ma_tt_gdp");
+            entity.Property(e => e.FilePdf)
+                .HasMaxLength(500)
+                .HasColumnName("file_pdf");
+            entity.Property(e => e.HinhAnh)
+                .HasMaxLength(500)
+                .HasColumnName("hinh_anh");
+            entity.Property(e => e.HoatDong).HasColumnName("hoat_dong");
+            entity.Property(e => e.MaKhachHangB2b)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2b");
+            entity.Property(e => e.NgayCap).HasColumnName("ngay_cap");
+            entity.Property(e => e.NgayHetHan).HasColumnName("ngay_het_han");
+            entity.Property(e => e.SoChungNhanGdp)
+                .HasMaxLength(50)
+                .HasColumnName("so_chung_nhan_gdp");
+
+            entity.HasOne(d => d.MaKhachHangB2bNavigation).WithMany(p => p.ThongTinGdps)
+                .HasForeignKey(d => d.MaKhachHangB2b)
+                .HasConstraintName("fk_makhb2b_ttgdp_khb2b");
+        });
+
+        modelBuilder.Entity<ThongTinGpp>(entity =>
+        {
+            entity.HasKey(e => e.MaTtGpp).HasName("pk_thong_tin_gpp");
+
+            entity.ToTable("thong_tin_gpp", "customer");
+
+            entity.Property(e => e.MaTtGpp)
+                .HasMaxLength(10)
+                .HasColumnName("ma_tt_gpp");
+            entity.Property(e => e.FilePdf)
+                .HasMaxLength(500)
+                .HasColumnName("file_pdf");
+            entity.Property(e => e.HinhAnh)
+                .HasMaxLength(500)
+                .HasColumnName("hinh_anh");
+            entity.Property(e => e.HoatDong).HasColumnName("hoat_dong");
+            entity.Property(e => e.MaKhachHangB2b)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2b");
+            entity.Property(e => e.NgayCap).HasColumnName("ngay_cap");
+            entity.Property(e => e.NgayHetHan).HasColumnName("ngay_het_han");
+            entity.Property(e => e.SoChungNhanGpp)
+                .HasMaxLength(50)
+                .HasColumnName("so_chung_nhan_gpp");
+
+            entity.HasOne(d => d.MaKhachHangB2bNavigation).WithMany(p => p.ThongTinGpps)
+                .HasForeignKey(d => d.MaKhachHangB2b)
+                .HasConstraintName("fk_makhb2b_ttgpp_khb2b");
+        });
+
         modelBuilder.Entity<ThongTinNguonGoc>(entity =>
         {
             entity.HasKey(e => new { e.MaSanPham, e.MaTtng }).HasName("pk_ttng");
@@ -670,6 +1379,62 @@ public partial class CnnDbContext : DbContext
             entity.HasOne(d => d.MaSanPhamNavigation).WithMany(p => p.ThongTinPhapLies)
                 .HasForeignKey(d => d.MaSanPham)
                 .HasConstraintName("fk_masp_spkd_ttpl");
+        });
+
+        modelBuilder.Entity<ThongTinThue>(entity =>
+        {
+            entity.HasKey(e => new { e.MaTtThue, e.MaKhachHangB2b }).HasName("pk_thong_tin_thue");
+
+            entity.ToTable("thong_tin_thue", "customer");
+
+            entity.Property(e => e.MaTtThue)
+                .HasMaxLength(20)
+                .HasColumnName("ma_tt_thue");
+            entity.Property(e => e.MaKhachHangB2b)
+                .HasMaxLength(50)
+                .HasColumnName("ma_khach_hang_b2b");
+            entity.Property(e => e.HoatDong).HasColumnName("hoat_dong");
+            entity.Property(e => e.MaSoThue)
+                .HasMaxLength(50)
+                .HasColumnName("ma_so_thue");
+            entity.Property(e => e.XacNhanThue).HasColumnName("xac_nhan_thue");
+
+            entity.HasOne(d => d.MaKhachHangB2bNavigation).WithMany(p => p.ThongTinThues)
+                .HasForeignKey(d => d.MaKhachHangB2b)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_makhb2b_ttthue_khb2b");
+        });
+
+        modelBuilder.Entity<ThongTinXuatHoaDon>(entity =>
+        {
+            entity.HasKey(e => e.MaTtXuatHd).HasName("pk_thong_tin_xuat_hd");
+
+            entity.ToTable("thong_tin_xuat_hoa_don", "customer");
+
+            entity.Property(e => e.MaTtXuatHd)
+                .HasMaxLength(10)
+                .HasColumnName("ma_tt_xuat_hd");
+            entity.Property(e => e.DiaChi)
+                .HasMaxLength(2000)
+                .HasColumnName("dia_chi");
+            entity.Property(e => e.Email)
+                .HasMaxLength(200)
+                .HasColumnName("email");
+            entity.Property(e => e.LuuY)
+                .HasMaxLength(2000)
+                .HasColumnName("luu_y");
+            entity.Property(e => e.SoDt)
+                .HasMaxLength(20)
+                .HasColumnName("so_dt");
+            entity.Property(e => e.TenDonVi)
+                .HasMaxLength(2000)
+                .HasColumnName("ten_don_vi");
+            entity.Property(e => e.TenKhachHangXuatHoaDon)
+                .HasMaxLength(2000)
+                .HasColumnName("ten_khach_hang_xuat_hoa_don");
+            entity.Property(e => e.TenNguoiMuaHang)
+                .HasMaxLength(500)
+                .HasColumnName("ten_nguoi_mua_hang");
         });
 
         modelBuilder.Entity<UserMiddleware>(entity =>

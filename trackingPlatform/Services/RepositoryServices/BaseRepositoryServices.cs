@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using trackingPlatform.Models;
+using trackingPlatform.Models.SanPhamModels;
 
-namespace trackingPlatform.Service.RepositoryServices
+namespace trackingPlatform.Services.RepositoryServices
 {
     public class BaseRepositoryServices<T> where T : BaseModel
     {
