@@ -1,12 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using trackingPlatform.Models;
-using trackingPlatform.Service.BussinessServices;
-using trackingPlatform.Service.ExternalServices;
-using trackingPlatform.Service.RepositoryServices;
 using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
 using trackingPlatform.RestClients;
+using trackingPlatform.Models.SanPhamModels;
+using trackingPlatform.Services.SanPhamServices.RepositoryServices.SanPhamRepositoryServices;
+using trackingPlatform.Services.SanPhamServices.BussinessServices.SanPhamServices;
+using trackingPlatform.Services.RepositoryServices.SanPhamRepositoryServices;
+using trackingPlatform.Services.BussinessServices.SanPhamServices;
+using trackingPlatform.Service.ExternalServices;
+using trackingPlatform.Services.SanPhamServices.RepositoryServices;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSwaggerGen(c =>
@@ -69,6 +72,8 @@ builder.Services.AddScoped<ThongTinChinhServices>();
 builder.Services.AddScoped<ThongTinNguonGocServices>();
 builder.Services.AddScoped<ThongTinPhapLyServices>();
 builder.Services.AddScoped<ThongTinNoiBoServices>();
+builder.Services.AddScoped<HubServices>();
+builder.Services.AddScoped<TonKhoTheoHubServices>();
 builder.Services.AddScoped<ManualMapper>();
 
 builder.Services.AddScoped<ThongTinNoiBoRepositoryServices>();
@@ -88,6 +93,8 @@ builder.Services.AddScoped<DieuKienBaoQuanRepositoryService>();
 builder.Services.AddScoped<NhomKinhDoanhRepositoryServices>();
 builder.Services.AddScoped<DinhHuongSanPhamRepositoryServices>();
 builder.Services.AddScoped<DangBaoCheRepositoryServices>();
+builder.Services.AddScoped<HubRepositoryServices>();
+builder.Services.AddScoped<TonKhoTheoHubRepositoryServices>();
 builder.Services.AddScoped<WooCommerceService>();
 
 var app = builder.Build();
