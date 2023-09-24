@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Text.Json.Serialization;
+<<<<<<< HEAD
 using trackingPlatform.Models.GiaoDichModels;
 using trackingPlatform.Models.KhachHangModel;
+=======
+>>>>>>> 4bacfd5602449a84006f53f353eb1bad2a3a2912
 using trackingPlatform.Models.SanPhamModels;
 
 namespace trackingPlatform.Models.Request.SanPhamRequest.CreateUpdateSanPham

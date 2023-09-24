@@ -1,8 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+<<<<<<< HEAD
 using trackingPlatform.Models.SanPhamModels;
 using trackingPlatform.Models.Request.SanPhamRequest.CreateUpdate;
 using trackingPlatform.Services.SanPhamServices.BussinessServices.SanPhamServices;
 using trackingPlatform.Services.BussinessServices.SanPhamServices;
+=======
+using trackingPlatform.Service.BussinessServices;
+using trackingPlatform.Models.SanPhamModels;
+using trackingPlatform.Models.Request.SanPhamRequest.CreateUpdate;
+>>>>>>> 4bacfd5602449a84006f53f353eb1bad2a3a2912
 
 namespace trackingPlatform.Controllers.SanPhamController
 {

@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using trackingPlatform.Models.SanPhamModels;
+<<<<<<< HEAD
 using trackingPlatform.Services.BussinessServices.SanPhamServices;
 using trackingPlatform.Services.SanPhamServices.BussinessServices.SanPhamServices;
+=======
+using trackingPlatform.Service.BussinessServices;
+using trackingPlatform.Services.RepositoryServices.SanPhamRepositoryServices;
+>>>>>>> 4bacfd5602449a84006f53f353eb1bad2a3a2912
 
 namespace trackingPlatform.Controllers.SanPhamController
 {

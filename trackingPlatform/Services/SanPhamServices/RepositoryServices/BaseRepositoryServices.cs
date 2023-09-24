@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+<<<<<<< HEAD:trackingPlatform/Services/SanPhamServices/RepositoryServices/BaseRepositoryServices.cs
+=======
+using trackingPlatform.Models;
+>>>>>>> 4bacfd5602449a84006f53f353eb1bad2a3a2912:trackingPlatform/Services/RepositoryServices/BaseRepositoryServices.cs
 using trackingPlatform.Models.SanPhamModels;
 
-namespace trackingPlatform.Service.RepositoryServices
+namespace trackingPlatform.Services.RepositoryServices
 {
     public class BaseRepositoryServices<T> where T : BaseModel
     {

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+<<<<<<< HEAD
 using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
 using trackingPlatform.RestClients;
@@ -10,6 +11,18 @@ using trackingPlatform.Services.RepositoryServices.SanPhamRepositoryServices;
 using trackingPlatform.Services.BussinessServices.SanPhamServices;
 using trackingPlatform.Service.ExternalServices;
 using trackingPlatform.Services.SanPhamServices.RepositoryServices;
+=======
+using trackingPlatform.Models;
+using trackingPlatform.Service.BussinessServices;
+using System.Text.Json.Serialization;
+using Microsoft.OpenApi.Models;
+using trackingPlatform.RestClients;
+using trackingPlatform.Services.RepositoryServices.SanPhamRepositoryServices;
+using trackingPlatform.Services.ExternalServices.SanPhamExternalServices;
+using trackingPlatform.Services.BussinessServices.KhachHangServices;
+using trackingPlatform.Services.RepositoryServices.KhachHangRepositoryServices;
+using trackingPlatform.Services.ExternalServices.KhachHangExternalServices;
+>>>>>>> 4bacfd5602449a84006f53f353eb1bad2a3a2912
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSwaggerGen(c =>
@@ -54,7 +67,7 @@ builder.Services.AddSwaggerGen(options =>
                         options.UseDateOnlyTimeOnlyStringConverters();
                     });
 
-
+// sanPham
 builder.Services.AddScoped<DangBaoCheService>();
 builder.Services.AddScoped<DinhHuongSanPhamServices>();
 builder.Services.AddScoped<NhomKinhDoanhServices>();
@@ -96,6 +109,59 @@ builder.Services.AddScoped<DangBaoCheRepositoryServices>();
 builder.Services.AddScoped<HubRepositoryServices>();
 builder.Services.AddScoped<TonKhoTheoHubRepositoryServices>();
 builder.Services.AddScoped<WooCommerceService>();
+
+
+// khachHang
+builder.Services.AddScoped<PhuongThucLienLacRepositoryServices>();
+builder.Services.AddScoped<KhachHangB2cRepositoryServices>();
+builder.Services.AddScoped<LoaiTheThanhVienRepositoryServices>();
+builder.Services.AddScoped<NhomKiemSoatDacBietRepositoryServices>();
+builder.Services.AddScoped<PhanHangRepositoryServices>();
+builder.Services.AddScoped<PhanNganhRepositoryServices>();
+builder.Services.AddScoped<NhomKhachHangB2BRepositoryServices>();
+builder.Services.AddScoped<NguoiDaiDienRepositoryServices>();
+builder.Services.AddScoped<LoaiHinhDichVuRepositoryServices>();
+builder.Services.AddScoped<NgayCotMocRepositoryServices>();
+builder.Services.AddScoped<ChuyenKhoaRepositoryServices>();
+builder.Services.AddScoped<KhachHangB2bRepositoryServices>();
+builder.Services.AddScoped<NguoiNhanTtHdonRepositoryServices>();
+builder.Services.AddScoped<ThongTinGdpRepositoryServices>();
+builder.Services.AddScoped<ThongTinGppRepositoryServices>();
+builder.Services.AddScoped<ThongTinThueRepositoryServices>();
+builder.Services.AddScoped<CbnvKhachHangRepositoryServices>();
+builder.Services.AddScoped<ChiNhanhRepositoryServices>();
+builder.Services.AddScoped<CongNoRepositoryServices>();
+builder.Services.AddScoped<ThongTinXuatHoaDonServices>();
+builder.Services.AddScoped<KhachHangServices>();
+builder.Services.AddScoped<Khb2bLhdvServices>();
+builder.Services.AddScoped<KhNgayCotMocServices>();
+builder.Services.AddScoped<Khb2bCkhoaServices>();
+
+builder.Services.AddScoped<Khb2bCkhoaRepositoryServices>();
+builder.Services.AddScoped<KhNgayCotMocRepositoryServices>();
+builder.Services.AddScoped<Khb2bLhdvuRepositoryServices>();
+builder.Services.AddScoped<KhachHangRepositoryServices>();
+builder.Services.AddScoped<ThongTinXuatHoaDonRepositoryServices>();
+builder.Services.AddScoped<CongNoServices>();
+builder.Services.AddScoped<ChiNhanhServices>();
+builder.Services.AddScoped<CbnvKhachHangServices>();
+builder.Services.AddScoped<ThongTinThueServices>();
+builder.Services.AddScoped<ThongTinGppServices>();
+builder.Services.AddScoped<ThongTinKhachGdpServices>();
+builder.Services.AddScoped<NguoiNhanTtHdonServices>();
+builder.Services.AddScoped<KhachHangB2BServices>();
+builder.Services.AddScoped<ChuyenKhoaServices>();
+builder.Services.AddScoped<NgayCotMocServices>();
+builder.Services.AddScoped<LoaiHinhDichVuServices>();
+builder.Services.AddScoped<NguoiDaiDienPhapLyServices>();
+builder.Services.AddScoped<NhomKhachHangB2BServices>();
+builder.Services.AddScoped<PhanNganhServices>();
+builder.Services.AddScoped<PhanHangServices>();
+builder.Services.AddScoped<NhomKiemSoatDacBietServices>();
+builder.Services.AddScoped<LoaiTheThanhVienServices>();
+builder.Services.AddScoped<KhachHangB2CServices>();
+builder.Services.AddScoped<PhuongThucLienLacServices>();
+builder.Services.AddScoped<ManualMapperKhachHang>();
 
 var app = builder.Build();
 

@@ -1,8 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+<<<<<<< HEAD
 using trackingPlatform.Models.SanPhamModels;
 using trackingPlatform.Models.Request.SanPhamRequest.CreateUpdateSanPham;
 using trackingPlatform.Services.SanPhamServices.BussinessServices.SanPhamServices;
 using trackingPlatform.Services.BussinessServices.SanPhamServices;
+=======
+using trackingPlatform.Service.BussinessServices;
+using trackingPlatform.Models.SanPhamModels;
+using trackingPlatform.Models.Request.SanPhamRequest.CreateUpdateSanPham;
+>>>>>>> 4bacfd5602449a84006f53f353eb1bad2a3a2912
 
 namespace trackingPlatform.Controllers.SanPhamController
 {
@@ -95,17 +101,17 @@ namespace trackingPlatform.Controllers.SanPhamController
         /// Create or Update Sản phẩm kinh doanh EcDb
         /// </summary>
 
-        [HttpPost("sync-ec")]
-        public async Task<IActionResult> PostEc([FromBody] List<SanPhamRequest> sanPhamRequests)
-        {
-            try
-            {
-                return Ok(await _sanPhamKinhDoanhServices.AddOrUpdateSanPhamsSyncEc(sanPhamRequests));
-            }
-            catch
-            {
-                return Problem();
-            }
-        }
+        //[HttpPost("sync-ec")]
+        //public async Task<IActionResult> PostEc([FromBody] List<SanPhamRequest> sanPhamRequests)
+        //{
+        //    try
+        //    {
+        //        return Ok(await _sanPhamKinhDoanhServices.AddOrUpdateSanPhamsSyncEc(sanPhamRequests));
+        //    }
+        //    catch
+        //    {
+        //        return Problem();
+        //    }
+        //}
     }
 }
